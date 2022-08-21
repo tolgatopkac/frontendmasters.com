@@ -24,6 +24,6 @@ prettier vs eslint : prettier doesn't take care of any does not look at the code
 Parcel is a bundler. Parcel because it is just the easiest tool to set up.
 Parcel : "this is a TypeScript file. Therefore, I'm gonna use TypeScript to compile it. This is a CSS file, therefore I'm gonna use PostCSS to run it through, right? "
 
-**Bundlers Overview**
-**Component Module**
-**Browserslist**
+- **Bundlers Overview**
+- **Component Module**
+- **Browserslist**
