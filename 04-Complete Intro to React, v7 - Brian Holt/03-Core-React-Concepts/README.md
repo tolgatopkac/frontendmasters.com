@@ -15,3 +15,8 @@
 - You state and use effect 99% of what you need react hooks for everything else is a pretty specialized use case.
 - `useEffect` allows you to say "do a render of this component first so the user can see _something_ then as soon as the render is done, _then_ do something (the something here being an effect.)
 - the `[]` at the end of the useEffect is where you declare your data dependencies. React wants to know _when_ to run that effect again. You don't give it data dependencies, it assumes any time any hook changes that you should run the effect again.
+
+### Custom Hooks
+### Handling User Input
+- This is most useful when you need to be reactive to your data changing or when you're setting up or tearing down a component. Sometimes you just need to respond to someone pressing a button.
+- [React Events](https://reactjs.org/docs/events.html#supported-events)
