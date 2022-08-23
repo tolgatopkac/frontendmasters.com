@@ -20,3 +20,21 @@
 ### Handling User Input
 - This is most useful when you need to be reactive to your data changing or when you're setting up or tearing down a component. Sometimes you just need to respond to someone pressing a button.
 - [React Events](https://reactjs.org/docs/events.html#supported-events)
+### Component Composition
+-In general I find two reasons to break a component into smaller components: reusability and organization. When you want to use the same component in multiple places (e.g. a button, a tooltip, etc.) then it's helpful to have one component to maintain, test, use, etc
+
+### Styling the Pet Component 
+- React is typically fast enough that you'll never have any performance problems with it. That's the general rule of thumb. That's the way you should just file it in your brain is like, just write readable code.
+
+### Building for Production
+
+    npx parcel build src/index.html
+    npx serve dist
+
+- React already has a lot of developer conveniences built into it out of the box. What's better is that they automatically strip it out when you compile your code for production.
+
+### Strict Mode
+
+-  if you put your app into a StrictMode, it will add additional checks that basically help you future-proof your application. So they'll put things that don't allow you to do things that would not be compatible with, like the future React batching mode and the future suspense rendering and things like that.
+
+### React DevTools
