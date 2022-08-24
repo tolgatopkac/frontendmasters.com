@@ -4,11 +4,13 @@ import { useParams } from "react-router-dom";
 // Class Component
 
 class Details extends Component {
-  constructor(props) {
+  state = { loading: true };
+
+  /* constructor(props) {
     super(props);
 
     this.state = { loading: true };
-  }
+  } */
 
   async componentDidMount() {
     const res = await fetch(
