@@ -6,7 +6,8 @@ import ThemeContext from "./ThemeContext";
 import Details from "./Details";
 
 const App = () => {
-  const theme = useState("blue");
+  // Make here default color
+  const theme = useState("green");
   return (
     <StrictMode>
       <ThemeContext.Provider value={theme}>

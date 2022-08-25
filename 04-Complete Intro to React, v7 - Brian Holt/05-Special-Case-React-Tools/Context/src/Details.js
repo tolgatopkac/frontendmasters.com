@@ -1,4 +1,4 @@
-import { Component, useContext } from "react";
+import { Component } from "react";
 import { useParams } from "react-router-dom";
 import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
@@ -42,11 +42,13 @@ class Details extends Component {
             {animal} - {breed} - {city}, {state}
           </h2>
 
+          {/* CLASS COMPONENT CONTEXT EXAMPLE */}
           <ThemeContext.Consumer>
             {([theme]) => (
               <button style={{ backgroundColor: theme }}>Adopt {name}</button>
             )}
           </ThemeContext.Consumer>
+          {/* ---------------------------------------------------------------- */}
 
           <button>Adopt {name}</button>
           <p>{description}</p>
