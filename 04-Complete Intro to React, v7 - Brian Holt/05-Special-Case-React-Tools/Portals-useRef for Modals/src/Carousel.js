@@ -18,7 +18,6 @@ class Carousel extends Component {
   render() {
     const { active } = this.state;
     const { images } = this.props;
-
     return (
       <div className="carousel">
         <img src={images[active]} alt="animal" />
@@ -26,12 +25,12 @@ class Carousel extends Component {
           {images.map((photo, index) => (
             // eslint-disable-next-line
             <img
-              onClick={this.handleIndexClick}
               key={photo}
               src={photo}
-              data-index={index}
               className={index === active ? "active" : ""}
               alt="animal thumbnail"
+              onClick={this.handleIndexClick}
+              data-index={index}
             />
           ))}
         </div>
@@ -39,11 +38,5 @@ class Carousel extends Component {
     );
   }
 }
-
-console.log(Carousel.defaultProps);
-
-const x = new Carousel();
-
-x.state.active;
 
 export default Carousel;

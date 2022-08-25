@@ -1,21 +1,19 @@
 import { render } from "react-dom";
 import SearchParams from "./SearchParams";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { StrictMode, useState } from "react";
-import ThemeContext from "./ThemeContext";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Details from "./Details";
+import ThemeContext from "./ThemeContext";
 
 const App = () => {
-  // Make here default color
-  const theme = useState("green");
+  const theme = useState("darkblue");
   return (
     <StrictMode>
       <ThemeContext.Provider value={theme}>
         <BrowserRouter>
           <header>
-            <Link to="/">Adapt Me!</Link>
+            <Link to="/">Adopt Me!</Link>
           </header>
-
           <Routes>
             <Route path="/details/:id" element={<Details />} />
             <Route path="/" element={<SearchParams />} />
