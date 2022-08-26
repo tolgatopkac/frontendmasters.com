@@ -154,3 +154,4 @@ Parcel : "this is a TypeScript file. Therefore, I'm gonna use TypeScript to comp
 - "The other thing I'm gonna say about context is, it basically for 95% of the reasons we used to use Redux for. Context is now a better choice, I almost never use Redux anymore."
 
 
+# Portals-useRef for Modals
