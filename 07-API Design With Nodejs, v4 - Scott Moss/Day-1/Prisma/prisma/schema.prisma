@@ -10,6 +10,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// https://chronos.framer.website/
+// Change log app
+
 // User schema
 model User {
   id        String    @id @default(uuid())
@@ -49,6 +52,19 @@ model Update {
   version String?
   asset   String?
 
-  productId String
-  product   Product @relation(fields: [productId], references: [id])
+  productId   String
+  product     Product       @relation(fields: [productId], references: [id])
+  UpdatePoint UpdatePoint[]
+}
+
+model UpdatePoint {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+
+  name        String @db.VarChar(255)
+  description String
+
+  updateId String
+  update   Update @relation(fields: [updateId], references: [id])
 }
