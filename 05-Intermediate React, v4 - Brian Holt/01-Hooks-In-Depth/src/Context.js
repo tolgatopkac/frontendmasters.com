@@ -5,9 +5,9 @@ const UserContext = createContext([
     firstName: "Bob",
     lastName: "Bobberson",
     suffix: 1,
-    email: "bobbobberson@example.com"
+    email: "bobbobberson@example.com",
   },
-  (obj) => obj
+  (obj) => obj,
 ]);
 
 const LevelFive = () => {
@@ -36,8 +36,17 @@ const LevelFour = () => (
 
 const LevelThree = () => (
   <div>
-    <h3>third level</h3>
-    <LevelFour />
+    <UserContext.Provider
+      value={useState({
+        firstName: "James",
+        lastName: "Jameson",
+        suffix: 1,
+        email: "jamesjameson@example.com",
+      })}
+    >
+      <h3>third level</h3>
+      <LevelFour />
+    </UserContext.Provider>
   </div>
 );
 
@@ -53,13 +62,13 @@ const ContextComponent = () => {
     firstName: "James",
     lastName: "Jameson",
     suffix: 1,
-    email: "jamesjameson@example.com"
+    email: "jamesjameson@example.com",
   });
 
   return (
     <UserContext.Provider value={userState}>
       <h1>first level</h1>
-      <LevelTwo />
+      <LevelTwo userState={userState} />
     </UserContext.Provider>
   );
 };
