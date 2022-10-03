@@ -10,20 +10,45 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// User schema
 model User {
   id        String    @id @default(uuid())
   createdAt DateTime  @default(now())
   username  String    @unique
   password  String
-  Product   Product[]
+  products  Product[]
 }
 
+// Product schema
 model Product {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
 
-  name        String @db.VarChar(255)
+  name        String   @db.VarChar(255)
   // relationship with User
   belongsToId String
-  belongsTo   User   @relation(fields: [belongsToId], references: [id])
+  belongsTo   User     @relation(fields: [belongsToId], references: [id])
+  updates     Update[]
+}
+
+// update schema
+enum UPDATE_STATUS {
+  IN_PROGRESS
+  SHIPPED
+  DEPRECATED
+}
+
+model Update {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+
+  title   String
+  body    String
+  status  UPDATE_STATUS @default(IN_PROGRESS)
+  version String?
+  asset   String?
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
 }
