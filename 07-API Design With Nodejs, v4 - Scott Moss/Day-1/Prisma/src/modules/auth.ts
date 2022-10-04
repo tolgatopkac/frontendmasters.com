@@ -10,3 +10,21 @@ export const createJWT = (user) => {
   return token
 
 }
+
+
+// custom middleware
+// bearer : token
+export const protect = (req, res, next) => {
+  const bearer = req.headers.authorization
+
+  if (!bearer) {
+    res.status(401);
+    res.json("Not authorized")
+    return
+  }
+
+
+
+
+
+}
