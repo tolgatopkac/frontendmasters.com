@@ -1,0 +1,1 @@
+When adding JavaScript to HTML files directly, you can use modules by adding the `type="module"` attribute to the `script` tags.

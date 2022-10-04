@@ -1,0 +1,2 @@
+1.  Split the code below up into two pieces,  `math.js`  that includes the  `add`,  `subtract`,  `divide`  and  `multiply`  methods. The  `index.js`  file contains the remaining functionality.
+2.  Use ES2015 modules to export the  `add`,  `subtract`,  `divide`  and  `multiply`  methods from the  `math.js`  file, and import them in  `index.js`
