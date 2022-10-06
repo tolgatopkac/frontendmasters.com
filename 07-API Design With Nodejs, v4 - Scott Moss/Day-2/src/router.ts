@@ -8,7 +8,9 @@ router.get('/product', (req, res) => {
 })
 router.get('/product/:id', () => { })
 router.put('/product/:id', () => { })
-router.post('/product', () => { })
+router.post('/product', (req, res) => {
+
+})
 router.delete('/product/:id', () => { })
 
 
