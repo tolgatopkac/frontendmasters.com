@@ -8,19 +8,18 @@ import {
   Label
 } from '@twilio-paste/core';
 
-import { toCurrency } from './utilities';
+import { toCurrency } from '../utilities';
 
 export const MenuItem = ({
   uuid,
   name,
   price,
   quantity,
+  total,
   updatePrice = () => {},
   updateQuantity = () => {},
   remove = () => {}
 }) => {
-  const total = price * quantity;
-
   return (
     <Card marginTop="space40">
       <Heading variant="heading30" as="h3">
@@ -28,20 +27,22 @@ export const MenuItem = ({
       </Heading>
       <Flex>
         <Box padding="space20">
-          <Label htmlFor={`${uuid}-price`}>Price</Label>
+          <Label htmlFor={`$item-${uuid}-price`}>Price</Label>
           <Input
-            id={`${uuid}-price`}
+            id={`$item-${uuid}-price`}
             insertBefore={<div>$</div>}
             value={price}
-            onChange={(event) => updatePrice(parseInt(event.target.value))}
+            type="number"
+            onChange={(event) => updatePrice(event.target.value)}
           />
         </Box>
         <Box padding="space20">
-          <Label htmlFor={`${uuid}-quantity`}>Quantity</Label>
+          <Label htmlFor={`$item-${uuid}-quantity`}>Quantity</Label>
           <Input
-            id={`${uuid}-quantity`}
+            id={`$item-${uuid}-quantity`}
             value={quantity}
-            onChange={(event) => updateQuantity(parseInt(event.target.value))}
+            type="number"
+            onChange={(event) => updateQuantity(event.target.value)}
           />
         </Box>
         <Box padding="space20" textAlign="right" width="100%">
