@@ -33,3 +33,5 @@ class Counter {
 const singletonCounter = Object.freeze(new Counter());
 
 export default singletonCounter;
+
+// not için commit

@@ -23,3 +23,6 @@ export default Object.freeze({
   increment: () => ++counter,
   decrement: () => --counter,
 }); 
+
+
+// not için commit
