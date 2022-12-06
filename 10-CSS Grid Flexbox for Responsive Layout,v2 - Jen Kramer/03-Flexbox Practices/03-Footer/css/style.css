@@ -42,7 +42,6 @@ section {
 
 section h2 {
     font-size: 2.5rem;
-    margin-left: 100px;
 }
 
 section ul {
@@ -154,15 +153,67 @@ figcaption a {
 }
 
 
+/* footer styles */
+
+
+/* color stretches to 100% of the page width */
+
+.footer {
+    background-color: var(--color5);
+}
+
+
+/* width limited and centered to line up with the rest of the page */
+
+footer {
+    padding: 3rem;
+    display: flex;
+    flex-flow: column wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* h4 top margin comes from the browser - it prevents the top of the .social element and the address from aligning */
+
+footer h4 {
+    margin-top: 0;
+}
+
+footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+
+/* we want a constant distance between the buttons so they remain clickable at all times. flex-basis doesn't do that - sometimes the buttons are too close together. */
+
+footer li {
+    margin-right: 1rem;
+}
+
+footer address {
+    font-style: normal;
+    margin-top: 2rem;
+    font-weight: bold;
+}
+
+
 /* turn on flexbox here - prior to this, elements stacked individually as blocks */
 
 @media (min-width: 550px) {
-    section ul {
+    section ul,
+    footer {
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
     }
-    section li {
+    section li,
+    .social,
+    address {
         flex-basis: 49.5%;
     }
     /* turn off object position, inherit object-fit: cover */
@@ -180,13 +231,21 @@ figcaption a {
         shape-outside: polygon(35.84% 94.87%, 34.64% 87.05%, 51.64% 4.06%, 55.1% 2.38%);
         max-height: 211px;
     }
+    /* remove the top margin assigned above that provided space between .social and address */
+    footer address {
+        margin-top: 0;
+    }
 }
 
 @media (min-width: 800px) {
     section h2 {
         margin-left: 100px;
     }
-    section li {
+    section li,
+    .social {
         flex-basis: 32.5%;
+    }
+    address {
+        flex-basis: 65.5%;
     }
 }
