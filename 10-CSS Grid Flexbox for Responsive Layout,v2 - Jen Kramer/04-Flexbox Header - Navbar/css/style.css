@@ -50,6 +50,41 @@ section ul {
     margin: 0;
 }
 
+/* HEADER AND NAV STYLES */
+    .header {
+        background-color: var(--color5)
+    }
+
+    header{
+        padding:1rem;
+        max-width:1200px;
+        margin: 0 auto;
+    }
+
+    /* navigation - universal across breakpoint */
+    nav ul {
+        list-style-type: none;
+        margin:0;
+        padding: 0;
+    }
+
+    nav ul {
+        display:flex;
+        flex-flow:row wrap;
+        justify-content:flex-end;
+    }
+    
+    nav a {
+        text-decoration:none;
+        font-size:1.2rem;
+        color: var(--color1);
+        display:block;
+        padding: 0.5rem;
+    }
+  
+
+/*  */
+
 
 /* To keep mobile screens from being stupid long, consider setting a max height on the images and hide the overflow. 
 
@@ -247,5 +282,24 @@ footer address {
     }
     address {
         flex-basis: 65.5%;
+    }
+    /* navgiation logo in the center */
+    nav ul {
+        justify-content: flex-end;
+    }
+
+    nav li:first-child{
+        flex-basis:auto;
+        margin:0 auto;
+        order: 2;
+    }
+
+    nav li:nth-child(2),
+    nav li:nth-child(3){
+        order:1;
+    }
+    nav li:nth-child(4),
+    nav li:nth-child(5){
+        order:3;
     }
 }
