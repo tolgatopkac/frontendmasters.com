@@ -45,33 +45,32 @@ ul {
 
 .ball {
   --primary-color:rgb(37, 212, 37);
-  height: 5vmin;
-  width: 5vmin;
+  height: 10vmin;
+  width: 10vmin;
+  left: 50vw;
   border-radius: 50%;
-  // background: radial-gradient(circle at bottom right, #fb2324, #fe932a);
-    background-color: var(--primary-color);
+  background: radial-gradient(circle at bottom right, #fb2324, #fe932a);
+  
+  background-color: #fb2324;
+  // transition-property:background;
+  // transition-property:all;
+  // transition-property:transform;
 
- /* --- */
- animation: slide-right var(--duration) var(--easing) infinite;
+  /* transition-property:background,transform;
+  transition-timing-function: linear, ease-in-out;
+  transition-duration: 0.5s; */
 
- &:before{
-  --primary-color: orange;
-  content:'';
-  position: absolute;
-  height:100%;
-  width: 100%;
-  left:0;
-  top:0;
-  background-color: var(--primary-color);
+  transition:all 2s 0.5 ease-in-out;
+  transition-property:background,transform;
+  //property duration delay
+  
+  &:hover{
+    /* transition-delay:0.5s;
+    transition-duration: 1s, 3s; */
+    padding:3rem;
+    background:blue;
+    transform: scale(2);
+  }
 
- }
 }
 
-@keyframes slide-right {
-  from {
-    transform: translateX(0)
-  }
-  to{
-    transform: translateX(50vw)
-  }
-}
