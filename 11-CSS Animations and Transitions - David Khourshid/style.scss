@@ -16,14 +16,25 @@ body {
 
 }
 
+#app {
+  --bg:white;
+
+  &[data-state="loading"] {
+    --bg:orange;
+  }
+
+  background: var(--bg);
+}
+
 a {
   color: blue;
 }
 
 h1 {
   margin: 0;
-  color: var(--primary-color);
-  transition: all 0.3s;
+  // color: var(--primary-color);
+  // transition: all 0.3s;
+  opacity:var(--opacity);
 
   &:hover{
     font-size: 5vw;
@@ -79,4 +90,32 @@ ul {
   to{
     transform:translateX(25vw);
   }
+}
+
+.button {
+  appearance:none;
+  background:blue;
+  color:white;
+  font-weight: bold;
+  padding:2rem 3rem;
+  border: none;
+
+  transition:all 0.3s;
+
+
+
+  opacity: var(--opacity);
+
+/*   &:hover {
+    opacity:0.5;
+  }
+
+  &:active {
+    transition-duration: 1s;
+    transform:translateY(20%);
+    opacity:1;
+  }
+
+ */
+
 }

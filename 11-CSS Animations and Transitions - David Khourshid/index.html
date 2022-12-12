@@ -30,18 +30,22 @@
 
       <div class="ball" style="--i: 0 "></div>
       <!-- Choreography -->
-      <div class="ball" style="--i: 1 "></div>
+      <!-- <div class="ball" style="--i: 1 "></div>
       <div class="ball" style="--i: 2 "></div>
       <div class="ball" style="--i: 3 "></div>
-      <div class="ball" style="--i: 4 "></div>
+      <div class="ball" style="--i: 4 "></div> -->
     </div>
+    <button class="button">click me</button>
   </div>
 </body>
 <script>
-  /* CHANGE BODY BACKGROUND */
-  /*   document.body.addEventListener('click', () => {
-      document.body.style.setProperty('--primary-color', 'red')
-    }) */
+  const appEl = document.querySelector('#app');
+  const buttonEl = document.querySelector('button');
+
+  buttonEl.addEventListener('click', () => {
+    appEl.dataset.state = appEl.dataset.state === 'loading' ? 'success' : 'loading';
+  })
+
 </script>
 
 </html>
