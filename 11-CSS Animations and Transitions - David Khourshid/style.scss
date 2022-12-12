@@ -52,25 +52,53 @@ ul {
   background: radial-gradient(circle at bottom right, #fb2324, #fe932a);
   
   background-color: #fb2324;
-  // transition-property:background;
-  // transition-property:all;
-  // transition-property:transform;
+/* REMOVE TRANSITIONS */
 
-  /* transition-property:background,transform;
-  transition-timing-function: linear, ease-in-out;
-  transition-duration: 0.5s; */
+  animation-name: move-like-a-square, red-to-green;
+  animation-duration:4s;
 
-  transition:all 2s 0.5 ease-in-out;
-  transition-property:background,transform;
-  //property duration delay
-  
-  &:hover{
-    /* transition-delay:0.5s;
-    transition-duration: 1s, 3s; */
-    padding:3rem;
-    background:blue;
-    transform: scale(2);
-  }
+  // keyframes 100%
+  animation-delay:1s;
+  animation-fill-mode: both;
+  animation-iteration-count: 5;
+  animation-iteration-count: infinite;
+  // animation-direction: reverse;
+  animation-direction: alternate;
 
 }
 
+
+@keyframes move-like-a-square{
+  0% {
+    transform: none;
+  }
+
+  25% {
+    animation-timing-function: linear;
+   transform: translateX(20vw);
+  }
+
+  50% {
+    transform:translateX(20vw) translateY(20vw);
+  }
+
+  75%{
+     transform:translateX(0) translateY(20vw);
+  }
+
+  100%{
+    //  transform:none;
+     transform:translateY(-20vw);
+
+  }
+}
+@keyframes red-to-green{
+  from {
+    background:red;
+    transform:scale(0);
+  }
+  to{
+    background:green;
+    transform:scale(1);
+  }
+}
