@@ -1,4 +1,4 @@
-@import '../styles/base.scss';
+@import "../styles/base.scss";
 
 body {
   display: flex;
@@ -10,23 +10,23 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  grid-template-areas: 'figure';
+  grid-template-areas: "figure";
   grid-column-gap: 2rem;
   width: 20vw;
   aspect-ratio: 1;
   border: 1px solid;
 
-  &[data-state='collapsed'] {
+  &[data-state="collapsed"] {
     .ui-content {
       display: none;
     }
   }
 
-  &[data-state='expanded'] {
+  &[data-state="expanded"] {
     padding: 2rem;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
-    grid-template-areas: 'figure content';
+    grid-template-areas: "figure content";
     aspect-ratio: 2;
     width: 70vw;
   }
@@ -54,7 +54,7 @@ body {
   align-items: center;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -64,11 +64,17 @@ body {
     transform-origin: top left;
   }
 
+  transform: translate(calc(var(--dx) * 1px), calc(var(--dy) * 1px));
   // Add invert styles here to :before
-  // ...
-
+  &[data-flip="invert"] {
+    transform: translate(calc(var(--dx) * 1px), calc(var(--dy) * 1px))
+      scale(var(--dw), var(--dh));
+  }
   // Add play styles here to :before
-  // ...
+  &[data-flip="play"] {
+    transform: none;
+    transition: transform 0.3s;
+  }
 
   > .ui-caption {
     font-size: 2rem;
