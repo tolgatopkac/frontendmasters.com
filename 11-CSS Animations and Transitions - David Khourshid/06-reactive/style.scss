@@ -10,6 +10,7 @@
   transform: translate(calc(var(--x-px) - 50%), calc(var(--y-px) - 50%));
 
   &::before {
+    display: none;
     content: attr(style);
     position: absolute;
     top: 100%;
