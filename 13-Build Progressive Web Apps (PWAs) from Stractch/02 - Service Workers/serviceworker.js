@@ -5,3 +5,16 @@ self.addEventListener("install", event => {
         cache.addAll(assets)
     })
 });
+
+/* self.addEventListener("fetch",event => {
+    const response = new Response("hello, I'm a response")
+    event.responseWith(response);
+}) */
+
+
+self.addEventListener("fetch",event=> {
+    if(event.request.url == "http://localhost:3000/fake"){
+            const response = new Response(`hello I'm a response on URL ${event.request.url}`);
+        event.respondWith(response);
+    }
+})
