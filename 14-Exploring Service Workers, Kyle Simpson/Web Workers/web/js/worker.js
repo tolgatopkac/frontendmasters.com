@@ -2,7 +2,8 @@
 
 var curNum = 0;
 
-self.onmessage = onMessage;
+// self.onmessage = onMessage;
+self.postMessage("Hello from the webworker");
 
 // **********************************
 

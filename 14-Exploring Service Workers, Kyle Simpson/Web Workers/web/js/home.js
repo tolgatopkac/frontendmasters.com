@@ -3,6 +3,9 @@
 
 	var startStopBtn;
 	var fibsList;
+
+	// worker variable❗
+	// var worker;
 	var worker;
 
 	document.addEventListener("DOMContentLoaded",ready,false);
@@ -35,9 +38,15 @@
 		startStopBtn.innerText = "Stop";
 		fibsList.innerHTML = "";
 
+		// worker = new Worker("/js/worker.js");
+		// worker.addEventListener("message",onMessage);
+		// worker.postMessage({ start: true });
+
+		// TODO
 		worker = new Worker("/js/worker.js");
+	// message Event
 		worker.addEventListener("message",onMessage);
-		worker.postMessage({ start: true });
+
 	}
 
 	function stopFibs() {
@@ -49,8 +58,13 @@
 		worker = null;
 	}
 
-	function onMessage(evt) {
+	// DEFINE OnMessage Function
+/* 	function onMessage(evt) {
 		renderFib(evt.data.num,evt.data.fib);
+	} */
+
+	function onMessage(evt) {
+		console.log(evt.data);
 	}
 
 })();
