@@ -5,9 +5,13 @@
 
 	var isOnline = ("onLine" in navigator) && navigator.onLine;
 	var isLoggedIn = /isLoggedIn=1/.test(document.cookie.toString() || "");
+	var usingSw = ("serviceWorker" in navigator);
+	var swRegistration;
+	var svcworer;
 
 	document.addEventListener("DOMContentLoaded",ready,false);
 
+	initServiceWorker().catch(console.error);
 
 	// **********************************
 
@@ -26,6 +30,13 @@
 		window.addEventListener("offline",function offline(){
 			offlineIcon.classList.remove("hidden");
 			isOnline = false;
+		})
+	}
+
+
+	async function initServiceWorker(){
+		swRegistration = await navigator.serviceWorker.register("/sw.js",{
+			updateViaCache:false
 		})
 	}
 
