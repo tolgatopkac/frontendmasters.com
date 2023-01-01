@@ -65,6 +65,7 @@
 
 	function onMessage(evt) {
 		console.log(evt.data);
+		worker.postMessage("Hello from the client");
 	}
 
 })();

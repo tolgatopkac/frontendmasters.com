@@ -5,12 +5,20 @@ var curNum = 0;
 // self.onmessage = onMessage;
 self.postMessage("Hello from the webworker");
 
+self.onMessage=onMessage;
+
 // **********************************
 
-function onMessage() {
-	getNextFib();
+
+function onMessage(evt) {
+	console.log(`Received in web worker: ${evt.data}`);
+
 }
 
+/* function onMessage() {
+	getNextFib();
+}
+ */
 function getNextFib() {
 	var curFib = fib(curNum);
 	self.postMessage({ num: curNum, fib: curFib });
