@@ -11,20 +11,28 @@ self.onMessage=onMessage;
 
 
 function onMessage(evt) {
-	console.log(`Received in web worker: ${evt.data}`);
-
-}
-
-/* function onMessage() {
 	getNextFib();
+
 }
- */
+// Bir worker dan veri alma
 function getNextFib() {
 	var curFib = fib(curNum);
 	self.postMessage({ num: curNum, fib: curFib });
 	curNum++;
 	getNextFib();
 }
+
+
+/* function onMessage() {
+	getNextFib();
+}
+ */
+// function getNextFib() {
+// 	var curFib = fib(curNum);
+// 	self.postMessage({ num: curNum, fib: curFib });
+// 	curNum++;
+// 	getNextFib();
+// }
 
 function fib(n) {
 	if (n < 2) {
