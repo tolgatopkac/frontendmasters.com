@@ -36,8 +36,16 @@
 
 	async function initServiceWorker(){
 		swRegistration = await navigator.serviceWorker.register("/sw.js",{
-			updateViaCache:false
+			updateViaCache:"none"
 		})
+
+		 svcworer = swRegistration.installing || swRegistration.waiting || swRegistration.active
+
+		 navigator.serviceWorker.addEventListener("controllerchange",function onController(){
+			svcworer = navigator.serviceWorker.controller
+		 })
+
+
 	}
 
 })();
