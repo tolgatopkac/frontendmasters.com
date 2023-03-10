@@ -73,3 +73,21 @@ Kimlik doğrulaması uygulamak için günümüzde genellikle üç seçeneğiniz 
 #### Identity As a Service IDaaS
 
 - Web sitelerinde kimlik doğrulama için çözüm sunan 3. taraf servisler ( Auth0 - Firsebase - Azure vs.)
+
+### Web Authentication Strategies
+
+#### Security Risk Kavramları
+
+- Man in the Middle Attacks
+- Keyloggers
+- Easy to guess passwords
+- Web Servers and DBs Attacks
+- Phishing and Social Engineering Attacks
+
+**Not : ❗** HTTP 'de her şey düz metin olarak geçer. Örnek olarak bir Linux bilgisiyle bir halka açık bir Wi-Fi'ye girildiğinde, halka açık olan Wi-Fi yönlendiricisine girebilirsiniz. Halka açık Wi-Fi'de yapılan tüm HTTP isteklerini, kullanıcıların HTTP sitelerine yazdığı tüm kimlik bilgileri dahil olmak üzere gözükmektedir. - man in the middle attacks - örneği.
+Bugünlerde HTTP siteleri bu yüzden yerine HTTPS kullanılmalıdır. HTTPS ile tarayıcı ve web sunucusu arasında şifreleme olduğundan HTTP'de yer alan sorunu çözmektedir.
+
+#### Auth Strategies Usage
+
+Güvenlik sıralamasına göre
+Form-based Auth < Multi-factor Auth < WebAuthn < Passwordless Auth
