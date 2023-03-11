@@ -91,3 +91,36 @@ Bugünlerde HTTP siteleri bu yüzden yerine HTTPS kullanılmalıdır. HTTPS ile 
 
 Güvenlik sıralamasına göre
 Form-based Auth < Multi-factor Auth < WebAuthn < Passwordless Auth
+
+## Classic Login Flow
+
+#### Enhancing Login Forms
+
+İlk olarak, akış genellikle en az üç adımı içerir,
+kullanıcıyı kaydetmek için bir
+
+- kayıt formu (Register),
+- giriş formu (Login)
+- Parola Sıfırlama ( Reset Password )
+
+Bu Formlar oluştururken daha iyi bir UX deneyimi için yapılması gerekenler
+
+- Connected Labels for each element
+- Don't use placehoder as labels
+- Using HTML semantics
+- On SPAs, form names different for registration and login forms
+- Let the user make the password visible
+- Help Password Managers with autocomplete HTML attributes
+- Help Accessibility with aria-describedby attribute for instructions
+- On SPAs, use submit form event and submission will be triggered by a pushState
+
+```javascript
+	<input type="password" autocomplete="new-password">
+
+	<input type="password" autocomplete="current-password">
+
+	<input type="text" autocomplete="name">
+
+	<input type="email" autocomplete="username">
+
+```
