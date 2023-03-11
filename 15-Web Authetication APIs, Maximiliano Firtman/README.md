@@ -136,3 +136,5 @@ Yeni oluşturulan bir üyelik formunda
 	<label for="register_password">Your Password</label>
 	<input type="password" id="register_password" required autocomplete="new-password"/>
 ```
+
+❗ **Not :** Oluşturduğun formlarda formun sonunda yer alan `<button>` `onclick="Auth.login()` eklemek yerine `<form>` tag'ine `onsubmit` ekle.
