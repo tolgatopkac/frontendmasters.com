@@ -114,13 +114,25 @@ Bu Formlar oluştururken daha iyi bir UX deneyimi için yapılması gerekenler
 - Help Accessibility with aria-describedby attribute for instructions
 - On SPAs, use submit form event and submission will be triggered by a pushState
 
+#### Form Accessibility & UX
+
+Oluşturulan formlarda parola yöneticisi ( password managers ) kullanabilmek için input tag'leri içinde `autocomplete` kullanmalısın.
+
+Yeni oluşturulan bir üyelik formunda
+
 ```javascript
-	<input type="password" autocomplete="new-password">
 
-	<input type="password" autocomplete="current-password">
+	// #type
+	<label for="register_name">Your Name</label>
+	<input id="register_name" type="text" required autocomplete="name"/>
 
-	<input type="text" autocomplete="name">
+	//  type email
+	//  formda username için input yer almazsa autocompete="username" kullan
 
-	<input type="email" autocomplete="username">
+	<label for="register_email" />
+	<input id="register_email" type="email" required autocomplete="username" />
 
+	// #type password
+	<label for="register_password">Your Password</label>
+	<input type="password" id="register_password" required autocomplete="new-password"/>
 ```
