@@ -40,14 +40,43 @@ function findUser(email) {
 }
 
 // ADD HERE THE REST OF THE ENDPOINTS
+app.post("/auth/login", (req, res) => {
+  // check user existS?
+  const userFound = findUser(req.body.email);
+
+  if (userFound) {
+    // user Found, Check password
+    if (bcrypt.compareSync(req.body.password, userFound.password)) {
+      res.ok({ ok: true, name: userFound.name, email: userFound.email });
+    } else {
+      res.send({
+        ok: false,
+        message: "Credential are wrong.",
+      });
+    }
+  } else {
+    // User Not Found
+    res.send({
+      ok: false,
+      message: "Credential are wrong.",
+    });
+  }
+});
+
 app.post("/auth/register", (req, res) => {
   // req = get all the information coming the browser
   // res = send information the browser
+
+  // hashPassword
+  const salt = bcrypt.genSaltSync(10);
+  const hashedPass = bcrypt.hashSync(req.body.password, salt);
+
   // TODO : DATA VALIDATION
   const user = {
     name: req.body.name,
     email: req.body.email,
-    password: req.body.password,
+    // password: req.body.password,
+    password: hashedPass,
   };
 
   const userFound = findUser(user.email);
