@@ -14,6 +14,20 @@ const Auth = {
     } else {
       alert(res.message);
     }
+    // Credential Management API storage
+    // Token olmadan otomatik giriş yapmak
+    if (window.PasswordCredential && user.password) {
+      const credentials = new PasswordCredential({
+        id: user.email,
+        password: user.password,
+        name: user.name,
+      });
+      try {
+        navigator.credentials.store(credentials);
+      } catch (e) {
+        console.log(e);
+      }
+    }
   },
 
   async register(event) {
@@ -27,14 +41,11 @@ const Auth = {
     // call API
     const response = await API.register(user);
     // console.log(response);
-    Auth.postLogin(response, {
-      name: user.name,
-      email: user.email,
-    });
+    Auth.postLogin(response, user);
   },
 
   async login(event) {
-    event.preventDefault();
+    if (event) event.preventDefault();
     const credentials = {
       email: document.getElementById("login_email").value,
       password: document.getElementById("login_password").value,
@@ -46,12 +57,33 @@ const Auth = {
       name: response.name,
     });
   },
+  // Retrieving Credentials
+  // Kimlik bilgilerine sahip olduğumda iki seçeneğim olacak.
+  // - formu önceden doldurabilir giriş yapmak için kullanabilirim
+  // - otomatik oturum açma
+  // OTOMATIK giriş kullandığında ve sadece 1 hesap kayıtlıysa site yüklenir yüklenmez giriş yapılır.
+  // todo kullanıcının otomatik oturum açmak isteyip istemediğini dair bir onay kutusu ve UI öğesi sormak iyi fikir olabilir.
+  async autoLogin() {
+    if (window.PasswordCredential) {
+      const credentials = await navigator.credentials.get({ password: true });
+      // SAFARI'DE ÇALIŞMAZ ONLY CHROMIUM-BASED
+      document.getElementById("login_email").value = credentials.id;
+      document.getElementById("login_password").value = credentials.password;
+      Auth.login();
+      // SAFARI'DE ÇALIŞMAZ
+      console.log(credentials);
+    }
+  },
 
   logout() {
     Auth.isLoggedIn = false;
     Auth.account = null;
     Auth.updateStatus();
     Router.go("/");
+    //  Bu yüzden çıkış yaparken, önce parola kimlik bilgisinin varlığını kontrol edebilirim, yani API varsa, navigator.credentials.preventSilentAccess yöntemini çağırmalıyız. Bu şekilde bir sonraki giriş yapışınıza kadar sessiz erişim olarak bilinen otomatik girişi önleyecektir.
+    if (window.PasswordCredential) {
+      navigator.credentials.preventSilentAccess();
+    }
   },
 
   updateStatus() {
@@ -80,6 +112,9 @@ const Auth = {
   init: () => {},
 };
 Auth.updateStatus();
+
+// auto login
+Auth.autoLogin();
 
 export default Auth;
 

@@ -138,3 +138,41 @@ Yeni oluşturulan bir üyelik formunda
 ```
 
 ❗ **Not :** Oluşturduğun formlarda formun sonunda yer alan `<button>` `onclick="Auth.login()` eklemek yerine `<form>` tag'ine `onsubmit` ekle.
+
+### Credential Management
+
+#### Credential Management API
+
+- **It let us save and retrieve in the browser's password manager** : Tarayıcının parola yöneticisinde veri kaydetmemize ve geri almamıza olanak tanır. Otomatik olarak görünen parola yöneticisine API üzerinden erişilebilir.
+- **Credentials (username / password ) :** Parola yöneticisi ( Password management ) kullanıcı adı ve şifre çiftini kaydetmek için kabul edilir.
+- **Federated Credentials** : Google veya Apple ile giriş yaparken gelen meta verileri nasıl kaydedebileceğinizi gösteren bir özelliktir. Sadece kullanıcı adı ve şifre değil, Token, meta verileri, kimlikler vs.
+- **Public / Private Keys **
+
+**WebAuthn**'in sahne arkasında kullandığı API budur. Web Kimlik Doğrulaması olarak da bilinir ve tarayıcıda biyometrik kimlik doğrulaması kullanmamızı sağlayan API'dir.
+
+- It let us implement auto login safely.
+
+Credentials, it's Chromium-only ( Chrome - Edge - Opera - Brave - Samsung Internet ) çalışır.
+Safari sadece public/private keys destekler.
+
+```javascript
+// Credential Management API
+
+const credentials = new PasswordCredential({
+  id: "admin",
+  password: "123456",
+});
+
+await navigator.credentials.store(credentials);
+```
+
+```javascript
+// şifreyi almak için get yöntemi kullanılır.
+
+const credentials = await navigator.credentials.get({password.true});
+
+```
+
+❗ Note : Geliştirici olarak kimlik bilgilerini kaldıramazsınız, yani API'de bir kaldırma yok.
+
+❗ API'de yer alan autologin kullanıldığında clientside tarafına kullanıcı bilgileri iletilir. Kullanıcının password'u loglanabilir. Safari bu sebepe API'yi kullanmak istemiyor.
