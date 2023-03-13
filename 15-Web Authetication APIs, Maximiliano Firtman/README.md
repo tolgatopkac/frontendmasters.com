@@ -1,16 +1,6 @@
-# Coffee Masters Authentication Demo
-
-This is the initial project for the FullStack Authentication workshop at Frontend Masters
-
-### Notes
-
----
-
-# Web Authentication APIs - 10.03.2023
-
----
-
 # Web Authentication APIs - Maximiliano Firtman
+
+[Course Website](https://firtman.github.io/authentication)
 
 ### Kurs içeriği
 
@@ -72,7 +62,7 @@ Kimlik doğrulaması uygulamak için günümüzde genellikle üç seçeneğiniz 
 
 #### Identity As a Service IDaaS
 
-- Web sitelerinde kimlik doğrulama için çözüm sunan 3. taraf servisler ( Auth0 - Firsebase - Azure vs.)
+Web sitelerinde kimlik doğrulama için çözüm sunan 3. taraf servisler ( Auth0 - Firsebase - Azure vs.)
 
 ### Web Authentication Strategies
 
@@ -114,6 +104,18 @@ Bu Formlar oluştururken daha iyi bir UX deneyimi için yapılması gerekenler
 - Help Accessibility with aria-describedby attribute for instructions
 - On SPAs, use submit form event and submission will be triggered by a pushState
 
+```javascript
+	<input type="password" autocomplete="new-password">
+
+	<input type="password" autocomplete="current-password">
+
+	<input type="text" autocomplete="name">
+
+	<input type="email" autocomplete="username">
+```
+
+###
+
 #### Form Accessibility & UX
 
 Oluşturulan formlarda parola yöneticisi ( password managers ) kullanabilmek için input tag'leri içinde `autocomplete` kullanmalısın.
@@ -122,19 +124,19 @@ Yeni oluşturulan bir üyelik formunda
 
 ```javascript
 
-	// #type
+	#type text
 	<label for="register_name">Your Name</label>
-	<input id="register_name" type="text" required autocomplete="name"/>
+	<input id="register_name" type="text" required autocomplete="name">
 
-	//  type email
-	//  formda username için input yer almazsa autocompete="username" kullan
+	#type email
+	# formda username için input yer almazsa autocompete="username" kullan
 
-	<label for="register_email" />
-	<input id="register_email" type="email" required autocomplete="username" />
+	<label for="register_email">
+	<input id="register_email" type="email" required autocomplete="username">
 
-	// #type password
+	#type password
 	<label for="register_password">Your Password</label>
-	<input type="password" id="register_password" required autocomplete="new-password"/>
+	<input type="password" id="register_password" required autocomplete="new-password">
 ```
 
 ❗ **Not :** Oluşturduğun formlarda formun sonunda yer alan `<button>` `onclick="Auth.login()` eklemek yerine `<form>` tag'ine `onsubmit` ekle.
@@ -176,3 +178,78 @@ const credentials = await navigator.credentials.get({password.true});
 ❗ Note : Geliştirici olarak kimlik bilgilerini kaldıramazsınız, yani API'de bir kaldırma yok.
 
 ❗ API'de yer alan autologin kullanıldığında clientside tarafına kullanıcı bilgileri iletilir. Kullanıcının password'u loglanabilir. Safari bu sebepe API'yi kullanmak istemiyor.
+
+### Federated Login
+
+#### Federated Login Providers
+
+**Nedir Federated Login ?**
+
+- Using OAuth you can use many providers
+  OAuth kullanarak, Github ile giriş yap, LinkedIn ile giriş yap gibi birçok providers kullanabilirsin. Eğer tek sayfalı SPA uygulamalarla OAuth 2.0 kullanıyorsan bbiraz zor olabilir, çünkü kendi sayfanızın altında olmayan bir URL açmanız gerekiyor, bir pop-up olabilir veya tek sayfalı uygulamanızdan çıkıp geri dönmelisin.
+- Sign In with Google
+  Google veya Apple gibi birçok provider, kendileri için OAuth uygulamaya gerek kalmadan çok basitleştirilmiş bir sürümü sunuyorlar. Bunlardan biri Google ile giriş (Sign In with Google) yap.
+- Sign In with Apple
+  Yerel sunucuda çalışmaz, bir alan adına sahip sunucuya ihtiyacın var ve apple geliştirici hesabına sahip olmalısın. Bunun için yılda 99$ ödemen gerekiyor.
+
+Note : ❗ Auth 2.0 : Kullanıcıları kimlik doğrulama yapmak için değil, daha çok kimlik bilgilerini farklı sağlayıcılar arasında taşımak için bir yol olarak tasarlanmıştır.
+
+### Sign In with Google / Registering Project
+
+Registering the Project with Google
+Bu tür providers girişlerini kullanıcıların diğer web sitelerinin hesaplarıyla oturum açmalarına izin vermek istediğinizde Google, Twitter, Github herhangi biri olabilir bir web geliştirici olarak hesap oluşturman gerekiyor. Apple'da ayrıca ödeme yapman gerekiyor.
+
+[https://developers.google.com/identity/gsi/web/guides/overview](Google%20i%C3%A7in%20ge%C3%A7erli%20olan%20documentation)
+
+- Setup
+- Google API client ID 'e ihtiyacın var.
+
+### WebAuthn
+
+[WebAuthn](https://webauthn.guide/)
+
+- **A multi-vendor effort**
+- **FIDO Alliance and W3C**
+- **Store safely private keys while sending public keys for the server**
+- **It can work with FIDO2 and platform authenticators (Face ID, Biometric Authentication)**
+- **It's typically used as a 2FA**
+- **PIN-based keys**
+- **FIDO2 USB keys (yubico)**
+- **Biometric Authenticators (TouchID, FaceID, Windows Hello, Android)**
+
+https://webauthn.io/
+
+#### Library
+
+- [https://simplewebauthn.dev/](https://simplewebauthn.dev/)
+- It has a server and a client library
+
+### Identifier-First Flow
+
+- Instead of a login form with username and password:
+- We first ask for identity (username)
+- We ask the browser about the login options for that user
+- We offer the user enter a password or login with other options
+
+### Passkeys
+
+**Passwordless Options**
+
+- Magic Links
+- OTP
+- Passkeys
+
+#### Passkeys
+
+- It's the new DNA of WebAuthn
+- The idea is to use WebAuthn as a First Factor
+- Authenticators are saving the keys (known as passkeys) in the cloud, so you can use them on different devices, and even share with other users
+- [https://passkeys.io/](https://passkeys.io/)
+
+❗ Note
+**Keep user's destination after login**
+**Always confirm user emails**
+**Ask the user about autologin**
+**Check Privacy's legislation**
+**Security is too important**
+**Test your login UX flows**
