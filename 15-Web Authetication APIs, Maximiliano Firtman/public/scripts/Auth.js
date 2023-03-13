@@ -29,7 +29,9 @@ const Auth = {
       }
     }
   },
-
+  loginFromGoogle(data) {
+    console.log(data);
+  },
   async register(event) {
     event.preventDefault();
     const user = {
