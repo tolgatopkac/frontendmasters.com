@@ -29,8 +29,12 @@ const Auth = {
       }
     }
   },
-  loginFromGoogle(data) {
-    console.log(data);
+  async loginFromGoogle(data) {
+    const response = await API.loginFromGoogle({ credentials: data });
+    Auth.postLogin(response, {
+      name: response.name,
+      email: response.email,
+    });
   },
   async register(event) {
     event.preventDefault();
@@ -69,11 +73,13 @@ const Auth = {
     if (window.PasswordCredential) {
       const credentials = await navigator.credentials.get({ password: true });
       // SAFARI'DE ÇALIŞMAZ ONLY CHROMIUM-BASED
-      document.getElementById("login_email").value = credentials.id;
-      document.getElementById("login_password").value = credentials.password;
-      Auth.login();
-      // SAFARI'DE ÇALIŞMAZ
-      console.log(credentials);
+      if (credentials) {
+        document.getElementById("login_email").value = credentials.id;
+        document.getElementById("login_password").value = credentials.password;
+        Auth.login();
+        // SAFARI'DE ÇALIŞMAZ
+        console.log(credentials);
+      }
     }
   },
 
