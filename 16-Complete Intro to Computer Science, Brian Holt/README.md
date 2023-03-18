@@ -157,3 +157,120 @@ gibi... müşteri deneyimi ile para vb. durumları değerlendirip tartışmalıs
 - Dilin içindeki özellikleri (built-in) kullanmalısın.
 
 ## Iterative Sorts
+
+### Bubble Sort
+
+Bubble sort, insan zihin modeline oldukça uyduğu için tipik olarak yapılacak ilk sıralamadır. Algoritma oldukça basittir: yan yana olan iki öğeyi karşılaştırın. Eğer sıraları yanlışsa ( daha büyük olan önce gelir ), bunları yer değiştirin. Ardından bir sonraki index'e ilerleyin, tekrar karşılaştırın, gerekiyorsa yerlerini değiştirin ve array içindeki bir sonraki öğeye devam edin. Dizinin sonuna ulaşıldığında önceki değişikleri tekrar kontrol etmemiz gerekiyor, Dizi boyunca herhangi bir değişiklik yapmadan tamamen geçtiğimizde dizi sıralanmıştır.
+
+Daha akılda kalıcı ifadeyle İlk döngüde en büyük sayıyı bulacak ve onunla son elemana kadar değiş tokuş yapmaya devam edeceksin. Bu nedenle buna bubble sort denir : en büyük değerler son noktalara doğru kabarcıklanır.
+
+### Bubble Sort - Example
+
+```javascript
+function bubbleSort(nums) {
+  let swapped = false;
+  do {
+    swapped = false;
+    for (let i = 0; i < nums.length; i++) {
+      if (nums[i] > nums[i + 1]) {
+        const temp = nums[i];
+        nums[i] = nums[i + 1];
+        nums[i + 1] = temp;
+        swapped = true;
+      }
+    }
+  } while (swapped);
+
+  return nums;
+}
+```
+
+Yukarıdaki fonksiyonu adım adım anlatacak olursak :
+
+- Bubble Sort adı verilen bir algoritma uygulanmaktadır, Bubble Sort, liste içindeki sayıları karşılaştırarak ve gerekli olduğunda yer değiştirerek sıralayan bir algoritmadır.
+- `bubbleSort` adlı bir fonksiyon tanımlanıyor ve fonksiyon `nums` adlı bir array parametresi alıyor.
+- Fonksiyon içinde `swapped` adında bir değişken tanımlanıyor ve ona `false` değeri atanıyor. Bu değişken, döngü içindeki sayıların yer değiştirip değiştirilmediğini kontrol etmemize yardımcı oluyor.
+- `do-while` döngüsü en az bir kez çalışır ve belirtilen koşul sağlandığı sürece çalışmaya devam eder. Yukardaki kodda koşulumuz `swapped` değişkeninin `true`olmasıdır. Array döngümüzde hiçbir sayı yer değiştirmediyse döngü sona erecektir. Çünkü tüm sayılar zaten sıralanmıştır.
+- `do-while` döngüsünün içinde, başka bir döngü olan `for` döngüsü kullanıyoruz. Bu döngü, 0'dan başlayarak `nums` array'inin uzunluğuna kadar devam eder. Bu döngü sayesinde, dizideki tüm öğeler tek tek kontrol edilir.
+- `for` döngüsünün içinde yer alan koşul ile mevcut elemanın `nums[i]` bşr sonraki elemandan `nums[i + 1]` büyük olup olmadığını kontrol ediyoruz. Eğer büyükse 2 elemanın yerini değiştiriyoruz.
+- Yer değiştirme işlemi için `temp` adında bir geçici değişken kullanıyoruz. Bu sayede, iki eleman değerini kaybetmeden yerlerini değiştirebiliriz.
+- Eğer yer değiştirme işlemi gerçekleştiyse `swapped` değişkenini `true` olarak güncelliyoruz.
+- Döngü, hiçbir sayı yer değiştirmediğinde sona erer. Bu, tüm sayıların sıralandığını gösterir.
+- Son olarak sıralanmış `nums` array'ini döndürürüz.
+
+**Alternatif Çözüm**
+
+```javascript
+function bubbleSort(nums) {
+  let n = nums.length;
+  let swapped;
+
+  for (let i = 0; i < n; i++) {
+    swapped = false;
+
+    for (let j = 0; j < n - i - 1; j++) {
+      if (nums[j] > nums[j + 1]) {
+        const temp = nums[j];
+        nums[j] = nums[j + 1];
+        nums[j + 1] = temp;
+        swapped = true;
+      }
+    }
+
+    if (!swapped) {
+      break;
+    }
+  }
+
+  return nums;
+}
+```
+
+### Insertion Sort
+
+❗ Bubble Sort çoğunlukla kullanılmaz, bunun sebebi (insertion sort) sıralamasının daha iyi olmasıdır.
+
+Insertion Sort, insan beyninin sıralama işlemini kafasında nasıl yapacağına benzer bir şekilde çalışır.
+
+Temel olarak, tüm sayıları sürekli kaydırırak sonunda nereye gitmesi gerektiğini bulana bulana kadar ve sonra oraya koyuyoruz ardından döngü tekrar başlatılıyor.
+
+Bu algoritmanıon Big O notasyonu değerlendirilmesi yapıldığında
+Worst case : Ters sıralı array
+Best case : Sıralanmış array
+Avg case : Karışık bir array
+
+Bubble Sorttan çok daha az iş yapar.
+Neden faydalı ?
+
+### Insertion Sort Practice
+
+```javascript
+function insertionSort(nums) {
+  for (let i = 1; i < nums.length; i++) {
+    let numberToInsert = nums[i];
+    let j;
+
+    for (j = i + 1; nums[j] > numberToInsert && j >= 0; j--) {
+      nums[j + 1] = nums[j];
+    }
+
+    nums[j + 1] = numberToInsert;
+  }
+
+  return nums;
+}
+```
+
+Yukarıdaki fonksiyonu adım adım anlatacak olursak :
+
+- `insertionSort` adlı fonksiyon sıralama yapacağı `nums` adında bir parametre alıyor.
+
+- Dış döngü, `i` değişkenini 1'den başlatarak, `nums` array'inin uzunluğuna kadar devam eder. Bu döngü, sıralanacak her sayıyı kontrol etmek için kullanılır.
+- İç döngüye geçmeden önce, `numberToInsert` değişkenine geçerli sayı `nums[i]` atanır. Bu değişken asıl konumuna yerleştirilmesi gereken sayıdır.
+- İç döngü `j` değişkenini `i` nin bir fazlasının başlatarak geriye doğru çalışı. İç döngünün koşulu, `j`nin sıfırdan büyük veya eşit olduğu ve `nums[j]` nin `numberToInsert` değerinden büyük olduğu sürece devam eder.
+- İç döngü çalıştığı sürece, `nums[j]` değeri bir sonraki pozisyona `num[j + 1]` kaydırılır. Bu işlem, `numberToInsert` doğru konumuna yerleştirilene kadar daha büyük değerlerin sağa kaydırılması sağlar.
+- İç döngü tamamlandığında, `nunmberToInsert` değişkeni doğru konumda olduğu için `j + 1` pozisyonunda `nums[j + 1]`'e yerleştirilir.
+- Dış döngü tamamlandığında, tüm sayılar doğru konumda olacaktır ve sıralı `nums` dizisi geri döndürülür.
+-
+
+## Recursive Sorts
