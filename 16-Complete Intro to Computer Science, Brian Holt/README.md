@@ -271,6 +271,62 @@ Yukarıdaki fonksiyonu adım adım anlatacak olursak :
 - İç döngü çalıştığı sürece, `nums[j]` değeri bir sonraki pozisyona `num[j + 1]` kaydırılır. Bu işlem, `numberToInsert` doğru konumuna yerleştirilene kadar daha büyük değerlerin sağa kaydırılması sağlar.
 - İç döngü tamamlandığında, `nunmberToInsert` değişkeni doğru konumda olduğu için `j + 1` pozisyonunda `nums[j + 1]`'e yerleştirilir.
 - Dış döngü tamamlandığında, tüm sayılar doğru konumda olacaktır ve sıralı `nums` dizisi geri döndürülür.
--
 
 ## Recursive Sorts
+
+### Recursion
+
+Ortadaki bir sorunun çözülebilecek bir sorunla karşılaşana kadar sorunların 2'ye bölünmesi, daha sonrasında ise çözümlerin bir araya getirilmesi.
+
+Recursive : Büyük bir problemi iki küçük probleme bölün ve sonunda çözebileceğiniz kadar küçük bir sorunla devam edin.
+
+```javascript
+function countTo(max, current, list) {
+  if (current > max) return;
+  console.log(max);
+  countTo(max, current + 1);
+}
+
+const counts = countTo(5,1 [])
+```
+
+Infinite Iteration : asla bitmeyen bir döngünüz olduğunda olur, yani while true gibi bir kullanım olduğunda bu sonsuz bir döngüdür.
+
+Recursive ne zaman faydalıdır ?
+
+- Problemin tanımında bulduğunuzda. Aynı problemin daha küçük sürümlerini kullanarak modellenmesi, problemi Recursive olarak çözebileceğiniz bir işaret olabilir. Fibonnaci Dizisi
+
+❗ Note : Recursive bir fonksiyon oluştururken her zaman ilk olarak temel durum tanımlayın. Temel durum, recursive fonksiyonun ne zaman duracağıdır.
+
+### Recursion Pracice Nested Addition
+
+- Array içinde yer alan tüm sayıları al ve topla
+
+```javascript
+[1, 2, 3, 4, 5, [6, 7, 8], 9, [[10, 11], 13, [14]]];
+
+function nestedAdd(array) {
+  let sum = 0;
+  for (let i = 0; i < array.length; i++) {
+    const current = array[i];
+
+    if (Array.isArray(current)) {
+      sum += nestedAdd(current);
+    } else {
+      sum += current;
+    }
+  }
+  return sum;
+}
+```
+
+### Recursion Practice : Factorials
+
+```javascript
+function factorial(num) {
+  if (num < 2) return 1;
+  return num * factorial(num - 1);
+}
+```
+
+### Merge Sort
