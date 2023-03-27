@@ -22,7 +22,7 @@ Learn computer science with Brian Holt!
 
 - ✔ Algorithm Analysis
 
-- ❌ Iterative Sorts
+- ✔ Iterative Sorts
 
 - ❌ Recursive Sorts
 
@@ -454,5 +454,21 @@ const merge = (left, right) => {
   return results.concat(left, right);
 };
 ```
+
+Yukarıdaki kodda gerçekleşen durumu açıklayacak olursam :
+
+- `mergeSort` adında fonksiyonumuz var ve bu fonksiyon bir array alır ve onları sıralamaya çalışır.
+- Eğer array'in uzunluğu 1 veya 0 ise zaten sıralanmış olduğu için direk listeyi döndürürüz.
+- Daha büyük bir array ile çalışıyorsak, array ortadan ikiye böleriz ve iki küçük array elde ederiz : "left" ve "right".
+- Bu iki küçük array'i de sıralamak için `mergeSort` fonksiyonu tekrar çağrılır.
+- İki küçük array sıralandıktan sonra, onları birleştirip büyük ve sıralanmış bir liste elde etmek için `merge`adlı başka bir fonksiyon kullanılıyor.
+
+`merge` fonksiyonu ise :
+
+- önce `results` adında boş bir array oluşturuyoruz. Bu array sıralanmış sonucu saklayacak.
+- Sol ve sağ array'lerin ikisi de boş olmayana kadar bir döngü oluşturuluyor.
+- Döngüde, sol listenin ilk elemanı sağ listenin ilk elemanından küçük veya eşitse, sol listenin ilk elemanını "results" listesine ekliyoruz. Değilse, sağ listenin elamanını ekliyoruz.
+- Döngü bittiğinde sol ve sağ listelerde kalan elemanlar eğer var "results" listesine eklenir.
+- Sonunda sıralanmış sayılarla dolu "results" array listesi döndürülür.
 
 ### Quick Sort
