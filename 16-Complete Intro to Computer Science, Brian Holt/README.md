@@ -24,7 +24,7 @@ Learn computer science with Brian Holt!
 
 - ✔ Iterative Sorts
 
-- ❌ Recursive Sorts
+- ✔ Recursive Sorts
 
 - ❌ Non-Comparison Sorts
 
@@ -472,3 +472,77 @@ Yukarıdaki kodda gerçekleşen durumu açıklayacak olursam :
 - Sonunda sıralanmış sayılarla dolu "results" array listesi döndürülür.
 
 ### Quick Sort
+
+JavaScript'de `.sort()` çağrıldığında genellikle **Merge Sort** bazen **Quick Sort** çağrılır ve sıralanmış bir array elde edilir.
+
+```
+[4,9,3,5] list
+-> 5 is made the pivot since it's the last in the array
+-> divide list into two lists, [4,3] and [9]
+-> call quicksort on those two lists
+
+[4, 3]
+-> 3 is pivot
+-> call quicksort on [] and [4]
+-> those both return as is as they are the base case of length 0 or 1
+-> concat [], 3, and [4]
+-> return [3,4]
+
+[9]
+-> returns as this it is a base case of length 1
+
+(back into the original function call)
+-> call concat on [3,4], 5, and [9]
+-> return [3,4,5,9]
+```
+
+Quicksort, sayıları küçükten büyüğe sıralamak için kullanılan hızlı bir yöntemdir. Yukarıdaki örneği adım adım açıklayacak olursak :
+
+- Öncelikle listenin sonundaki sayıyı "pivot" olarak seçiyoruz. Yukarıdaki örnekte `[4,9, 3, 5]` listesinde 5 sayısı pivot oluyor.
+- Pivot sayısından küçük sayılar bir array'e, büyük sayılar ise başka bir arrray'e konuluyor. Yukarıdaki örnekte 5'ten küçük sayılar `[4,3]` listesine 5'ten büyük sayılar `[9]` listesine konuluyor.
+- Şimdi bu iki listeyi (pivot sayısından küçük olanlar ve büyük olanlar) ayrı ayrı sıralamak için `quicksort` yöntemini tekrar kullanıyoruz.
+
+2 parçaya ayırdığımız arraylerde yani `[4,3]` ve `[9]`
+
+- [4,3] listesini sıralamak istediğimizde
+
+  pivot sayımız son sayı olan 3 oluyor.
+  3'den küçük sayılar yok, 3'ten büyük sayılar ise [4] listesinde. Bu iki liste zaten sıralı olduğu için `[3,4]` şeklinde birleştiriyoruz.
+
+- [9] 'un yer aldığı array için
+
+Tek elemanlı bir array olduğu için zaten sıralıdır ve üzerinde işlem yapılmasına gerek kalmıyor.
+
+Artık her liste de sıralandığına göre küçük sayılar listesini, pivot sayıyı ve büyük sayılar listesini birleştiriyoruz.
+
+`[3,4] + 5 + [9] = [3, 4, 5, 9]`
+
+Sonuç olarak `[4, 9, 3, 5]` array'ini quicksort yöntemiyle `[3,4,5,9]` şeklinde sıralanmış oldu.
+
+### Quick Sort Practice
+
+```javascript
+function quickSort(nums) {
+  // base case, array of length 0 or 1
+  if (nums.length <= 1) return nums;
+  // choose pivot last one
+  const pivot = nums[nums.length - 1];
+  // separate into left and right arrays
+  const left = [];
+  const right = [];
+
+  for (let i = 0; i < nums.length - 1; i++) {
+    if (nums[i] < pivot) {
+      left.push(nums[i]);
+    } else {
+      right.push(nums[i]);
+    }
+  }
+
+  // call quicksort on left and right arrays
+  const sortedLeft = quickSort(left);
+  const sortedRight = quickSort(right);
+
+  return sortedLeft.concat(pivot, sortedRight);
+}
+```
