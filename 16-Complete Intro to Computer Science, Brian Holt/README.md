@@ -26,11 +26,11 @@ Learn computer science with Brian Holt!
 
 - ✔ Recursive Sorts
 
-- ❌ Non-Comparison Sorts
+- ✔ Non-Comparison Sorts
 
-- ❌ Binary Search
+- ✔ Binary Search
 
-- ❌ Lists
+- ✔ Lists
 
 - ❌ Trees
 
@@ -546,3 +546,197 @@ function quickSort(nums) {
   return sortedLeft.concat(pivot, sortedRight);
 }
 ```
+
+### Non-Comparison Sorts
+
+Doğrudan sayılar birbirleriyle karşılaştırmak yerine farklı basamaklar karışılaştırılır.
+
+### Binary Search
+
+Tüm sayıları belirli bir düzende yerleştirmek yerine dizideki belirli bri elemanı bulmaya çalışıyoruz. Sıralanmamış bir array üzerinde arama yapılıyorsa, yapılabilecek tek arama lineerdir. Yani bir for döngüsü veya while döngüsü yazıldığında sorulan soru : Bu mu ? Bu mu ? ... diye kontrol edilir.
+
+Ancak zaten sıralanmış bir array'e sahipsen, binary search yapılabilir. ( Telefon Rehberleri )
+
+Doğru eleman buluna kadar dizi yarıya bölünür.
+
+```
+[0, 5, 10, 12, 15, 19, 21, 22, 24, 30]
+
+search for 12
+
+start in the middle, is 19 === 12? no, smaller, go left
+
+look in the middle of the smaller half, 10 === 12? no, larger, go right
+
+look in the middle of the larger half (which is now just one number), is 12 === 12? yes, found element
+```
+
+### Binary Search Practice
+
+```javascript
+function linearSearch(id, array) {
+  for (let i = 0; i < array.length; i++) {
+    if (id === array[i].id) {
+      return array[i];
+    }
+  }
+  return void 0;
+}
+```
+
+```javascript
+function binarySearch(id, array) {
+  let min = 0;
+  let max = array.length - 1;
+
+  let index;
+  let element;
+
+  while (min <= max) {
+    index = Math.floor((min + max) / 2);
+    element = array[index];
+
+    if (element.id < id) {
+      min = index + 1;
+    } else if (element.id > id) {
+      max = index - 1;
+    } else {
+      return element;
+    }
+  }
+  return void 0;
+}
+```
+
+### List
+
+### ArrayList
+
+Çok sayıda silme veya ekleme işleminin yapıldığı durumlarda kullanışlı değildir.
+
+### ArrayList Practice
+
+```javascript
+class ArrayList {
+  constructor() {
+    // instantiate all your variables
+    this.data = {};
+    this.length = 0;
+  }
+
+  push(value) {
+    // add an item to the end of the array
+    this.data[this.length] = value;
+    this.length++;
+  }
+
+  pop() {
+    // remove the last item in the array and returns it
+    const response = this.data[this.length - 1];
+    delete this.data[this.length - 1];
+    this.length--;
+    return response;
+  }
+
+  get(index) {
+    // return that item from the array
+    return this.data[index];
+  }
+
+  delete(index) {
+    // removes item from the array and collapses the array
+    const response = this.data[index];
+    this._collapseTo(index);
+    return response;
+  }
+  // private method
+  _collapseTo(index) {
+    for (let i = index; i < this.length; i++) {
+      this.data[i] = this.data[i + 1];
+    }
+    delete this.data(this.length - 1);
+    this.length--;
+  }
+}
+```
+
+### LinkedList
+
+Elemanın seçilmesi ve arama işlemleri için uygun değilidr fakat silme ve ekleme için kullanışlıdır.
+Yani listenin çok okunup az değiştirildiği durumlarda ArrayList kullan, LinkedList kullanma.
+
+JavaScript için hiç kullanma. JavaScript dizileri uygulayabileceğin her şeyden daha hızlı olacaktır. C, C++ veya Java gibi bir programlama diliyle çalışıyorsan büyük fark yaratabilir.
+
+```javascript
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+
+  push(value) {
+    const node = new Node(value);
+    this.length++;
+    if (!this.head) {
+      this.head = node;
+    } else {
+      this.tail.next = node;
+    }
+    this.tail = node;
+  }
+
+  pop() {
+    return this.delete(this.length - 1);
+  }
+
+  _find(index) {
+    if (index >= this.length) return null;
+    let current = this.head;
+    for (let i = 0; i < index; i++) {
+      current = current.next;
+    }
+    return current;
+  }
+
+  get(index) {
+    const node = this._find(index);
+    if(!node) return voide 0;
+    return node.value;
+  }
+
+  delete(index) {
+    if(index === 0){
+      const head = this.head;
+      if(head){
+        this.head = head.next;
+      }else{
+        this.head = null;
+        this.tail = null;
+      }
+      this.length--;
+      return head.value;
+    }
+    const node = this._find(index - 1);
+    const excise = node.next;
+    if(!excise) return null;
+    node.next = excise.next;
+    if(!node.next) this.tail = node.next;
+    this.length--;
+    return excise.value;
+  }
+}
+
+class Node {
+  constructor(value){
+    this.value = value;
+    this.next = null;
+  }
+}
+```
+
+### Trees
+
+Özel durumlar için kullanılır.
+
+### Binary Search Tree
