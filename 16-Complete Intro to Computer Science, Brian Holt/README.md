@@ -738,5 +738,153 @@ class Node {
 ### Trees
 
 Özel durumlar için kullanılır.
+Bir tür hiyerarşilere sahiptirler.
 
 ### Binary Search Tree
+
+![Binary Search Tree](https://i.ibb.co/B6vXG0z/bst.png)
+
+Root : 8
+
+Sol tarafta yer alan (sub tree) 8'den küçük
+
+Sağ tarafta yer alana (sub tree) 8'den büyük
+
+**Neden Kullanışlı**
+Diyelim ki 4 düğümünde (node) depolanan verileri istiyorum. Binary search tree'nin güzel yanı kök (root) ile başlıyorsun.
+
+4 8'den daha küçük mü veya büyük mü ?
+
+- Küçük (3) (left)
+  4 3'den büyük mü küçük mü ?
+- Büyük (6) (right)
+  4 6'dan büyük mü küçük mü ?
+- Küçük (left)
+  ... 4
+
+Temel olarak veri yapısındaki aramalar hızlı ve daha önceden optimize edilmiş hale gelir.
+
+Nasıl eleman eklenir ? **(Add)**
+
+7 eklemek istiyorum, aşağıdaki tree'de yer aldığı üzere 10'da başlıyorum.
+
+7 10'dan küçük ve sola gidilir
+
+Karşıma 5 çıkar, 5'ten büyük olduğu için sağa gidilir.
+
+Yine karşıma 8 çıkar ve 7 sayısı 8'in soluna eklenir.
+
+```javascript
+
+Current Tree:
+
+      10
+    /   \
+  5      15
+ / \     /
+3   8   12
+
+Add 7
+
+Result
+
+      10
+       /   \
+     5      15
+    / \     /
+   3   8   12
+      /
+     7
+
+```
+
+**Delete**
+Silme işlemi
+
+Eğer 5'i silmek istiyorsam :
+
+- Önce 5'i bul
+- Root (10) ile başla
+- 5 10'dan küçük sol subtree git ve 5'i bul.
+- Ardında sol tarafa yerleştirebileceğin sağ tarafta yer alan en küçük sayıyı bul
+- 5'in yerine 6'yi yerleştir.
+
+```javascript
+
+// Olasılığın fazla olduğu Karmaşık senaryo
+        10
+       /   \
+     5      15
+    / \    /  \
+   3   8  12  17
+      /
+     6
+      \
+       7
+
+// Delete 5
+         10
+       /   \
+     6'     15
+    / \    /  \
+   3   8  12  17
+      /
+     6
+      \
+       7
+
+```
+
+### Binary Search Tree Practice
+
+```javascript
+class Tree {
+  constructor() {
+    this.root = null;
+  }
+
+  add(value) {
+    if (this.root === null) {
+      this.root = new Node(value);
+    } else {
+      let current = this.root;
+      while (true) {
+        if (current.value > value) {
+          // go left
+          if (current.left) {
+            current = current.left;
+          } else {
+            current.left = new Node(value);
+            break;
+          }
+        } else {
+          // go right
+          if (current.right) {
+            current = current.right;
+          } else {
+            current.right = new Node(value);
+            break;
+          }
+        }
+      }
+    }
+    return this;
+  }
+  toObject() {
+    return this.root;
+  }
+}
+
+class Node {
+  // code maybe goes here
+
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+  toObject() {
+    return this.root;
+  }
+}
+```
