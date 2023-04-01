@@ -1079,3 +1079,86 @@ class Node {
 - Self Balancing AVL Tree çok büyük verilerle çalışıldığında hızlı bir şekilde aranan verinin bulunmasında kullanılacak algoritma. Ekleme ve silme performansından ödün vererek arama konusunda hız kazanırsın. Veritabanları için kullanışlıdır.
 
 ### Depth First Tree Traversals
+
+![Binary Search Tree](https://i.ibb.co/B6vXG0z/bst.png)
+
+Yukarıdaki Binary Search Tree ağacı verildiğinde tüm sayıların bir dizisi istendiğinde cevabın neler olabilir ? Sırası önemli değil sadece dizideki tüm sayılar isteniyor.
+
+**Sadece tüm sayılar istenildiğinde**
+
+- Pre-order Traversal (Temel olarak tüm node'lar ziyaret edilir.) : `[8, 3, 1, 6, 4, 7, 10, 14, 13]`
+
+**Sayılar sırayla istenildiğinde**
+
+- Mümkün olduğunca sola gidilir. Yukarıdaki ağaçta 8'de `in-order traversal` metodu çağrılır, sonra 3' `in-oder traversal` metodu çağrılır yine 1'de `in-order traversal` metodu çağrılır.
+
+1'in sol çocuğu yok bu yüzden 1 array'e eklenir. Daha sonra 3 ve sağ geçilir. `in-order traversal` metodu çağrılır. Aynı mantık sola git, sonra sağ git.
+
+`in-order taversal : ` Sola git diziye ekle, sonra sağ git.
+
+`pre-order traversal : ` Diziye ekle Sola git, sağ git.
+
+`post-order traversal: ` Kök her zaman en sol olur.
+
+❗ Aynı şeyi yapmanın neden 3 farklı yolunu öğreniyorsun ?
+
+" Bir diziden sıralanmış bir liste isterseniz, in-order traversal kullanırsın. Bir ağacın derin bir kopyasını oluşturmak istersen, pre-order traversal gerçekten yardımcı olacaktır. Derin kopyalar için, yeni bir düğüm oluşturabilir ve ardından çocukları ekleyebilirsiniz."
+
+### Depth First Tree Traversals Practice
+
+```javascript
+// preOrderTraverse
+/* 
+preOrderTraverse Fonksiyonunu açıklarsam : 
+
+PreOrderTraverse fonksiyonu : bir ağaç yapısındaki node(düğümleri) önceden dalaşan (ilk önce kök, sonrada sol alt ağaç, ardından sağ alt ağaç ) bir fonskiyodur. 
+2 parametre alır. (node ve array)
+
+Adım adım 
+1) Eğer node mevcut değilse boş bir array döndürür.
+2) Node değeri (node.value) dizinin sonuna eklenir.
+3) Node sol çocuğu ile aynı işlem yapılır ve array güncellenir.
+4) Node sağ çocuğu ile aynı işlem yapılır ve array güncellenir.
+5) İşlem tamamlandığında güncellenmiş array döndürülür.
+
+*/
+
+const preorderTraverse = (node, array) => {
+  if (!node) return array;
+  array.push(node.value);
+  array = preorderTraverse(node.left, array);
+  array = preorderTraverse(node.right, array);
+  return array;
+};
+
+// inOrderTraverse
+/* 
+- inorderTraverse fonksiyonu : Önce sol alt, sonra kök, en son sağ alt node ziyaret eden bir fonksiyondur. 
+
+
+*/
+
+const inorderTraverse = (node, array) => {
+  if (!node) return array;
+
+  array = inorderTraverse(node.left, array);
+  array.push(node.value);
+  array = inorderTraverse(node.right, array);
+  return array;
+};
+
+// postOrderTraverse :
+
+/* 
+  Ağaç yapısındaki düğümleri sondan başa dolaşma sırasına göre ziyaret eden (önce sol alt ağaç, sonra sağ alt ağaç ve en son kök) bir fonksiyonu içerir.
+*/
+
+const postorderTraverse = (node, array) => {
+  if (!node) return array;
+
+  array = postorderTraverse(node.left, array);
+  array = postorderTraverse(node.right, array);
+  array.push(node.value);
+  return array;
+};
+```
