@@ -1162,3 +1162,65 @@ const postorderTraverse = (node, array) => {
   return array;
 };
 ```
+
+### Breadth First Tree Traversals
+
+![Binary Search Tree](https://i.ibb.co/B6vXG0z/bst.png)
+
+Depth First Tree Traversals : Bir elemanın köküne kadar inip sub köklere ulaşırken, Breadth First Tree köke en yakın olan node(düğümlere) ulaşır. Yukarıdaki görselde 8'e en yakın düğümleri ele alırsak
+
+8 .. en yakın 3 ve 10
+
+sonrasında 1, 6, 14
+
+ve son 4, 7, 13 olur.
+
+kademe kademe aşağı inilir.
+
+Bunun için `queue` kullanılır. Eklenen ilk öğe çıkarılacak ilk öğe olur.
+
+```
+-> start function by adding root to the queue, queue = [8]
+-> process 8, add to final array array = [8]
+-> queue 3 and 10 to queue, queue = [3, 10]
+-> dequeue 3, queue = [10]
+-> queue 3's children, queue = [10, 1, 6]
+-> add 3 to final array, array = [8, 3]
+-> dequeue 10, queue = [1, 6]
+-> queue 10's children, queue = [1, 6, 14]
+-> add 10 to final array, array = [8, 3, 10]
+-> dequeue 1, queue = [6, 14]
+-> queue 1's children, nothing
+-> add 1 to final array, [8, 3, 10, 1]
+
+[etc.]
+
+final array is [8, 3, 10, 1, 6, 14, 4, 7, 13]
+```
+
+### Breadth First Tree Traversals - Practice
+
+```javascript
+const breadthFirstTraverse = (queue, array) => {
+  if (!queue.length) return array;
+
+  array.push(node.value);
+
+  if (node.left) queue.push(node.left);
+  if (node.right) queue.push(node.right);
+  return breadthFirstTraverse(queue, array);
+};
+
+// alternative
+
+const breadFirstTraverse = (queue, array) => {
+  while (queue.length) {
+    const node = queue.shift();
+    array.push(node.value);
+
+    if (node.left) queue.push(node.left);
+    if (node.right) queue.push(node.right);
+  }
+  return array;
+};
+```
