@@ -32,7 +32,7 @@ Learn computer science with Brian Holt!
 
 - ✔ Lists
 
-- ❌ Trees
+- ✔ Trees
 
 - ❌ Applying Tree Algorithms
 
@@ -1224,3 +1224,119 @@ const breadFirstTraverse = (queue, array) => {
   return array;
 };
 ```
+
+### Heap Sort
+
+Heap bir array. Heap yapısı, doğasında bir array olmasına rağmen bir ağaç benzeri veri yapısını temsil eder. Heap veri yapıları Binary Search Tree benzer fakat aynı değillerdir.
+
+Heap'ler bilgisayar biliminde sıkça kullanılırlar, genellikle öncelik sırası olan queue temsil etmek için kullanılırlar. Öncelik sırası olan bir queue, bir queue gibi olmasına rağmen queue'deki her öğe bir öncelikle ilişkilendirilir.
+
+- Network Stacks
+- İnternet trafiğinde indirme önceliği
+
+Netflix izlerken aynı anda Dropbox'dan indirme yapıyorsan burda öncelikli Netflix olmasın istersin, videonun kalitesinin kesilmesini istemezsin.
+
+**Binary Search Tree ve Heap arasındaki farklar**
+
+- Binary Search Tree node nesnelerinden oluşurken, heap her zaman bir dizi olacaktır.
+
+- BST en büyük fark bir node'un solundaki her şey daha küçükken sağında olan her şey daha büyüktür, bu kesin bir kuraldır. Bu kurala uymayan BST değildir. Binary Heap için bu her zaman geçerli değildir tek kuralı root olan sayı her zaman üst köklerinden büyüktür.
+
+- Binary Heap yapısı iki türe sahiptir. Maksimum heap'ler sayıları sıralamak için kullanışlıdır. Minimum heap ise ters sıralanmış bir array için kullanılabilir.
+
+![Heap Sort](https://i.ibb.co/bmcbzwT/heap.png)
+
+```
+// initial array
+[5, 3, 2, 10, 1, 9, 8, 6, 4, 7]
+
+// heapify the array
+start at index 4, value 1
+left child is index 9 value 7, right child is index 10, out of bounds
+7 is larger than 1, swap left child and parent
+[5, 3, 2, 10, 7, 9, 8, 6, 4, 1]
+call heapify on index 9, does nothing
+
+i-- index 3, value 10
+left child is index 7 value 6, right child is index 8 value 4
+neither is larger than 10
+nothing to do, next iteration
+
+i-- index 2, value 2
+left child is index 5 value 9, right child is index 6 value 8
+9 is the largest number, swap with parent
+[5, 3, 9, 10, 7, 2, 8, 6, 4, 1]
+call heapify on index 5, does nothing
+
+i-- index 1, value 3
+left child is index 3 value 10, right child is index 4 value 7
+10 is in the largest number, swap with parent
+[5, 10, 9, 3, 7, 2, 8, 6, 4, 1]
+call heapify on index 3
+left child is index 7 value 6, right child is index 8 value 4
+6 is larger, swap with parent
+[5, 10, 9, 6, 7, 2, 8, 3, 4, 1]
+call heapify on index 7, does nothing
+
+i-- index 0, value 5
+left child is index 1 value 10, right child is index 2 value 9
+10 is in the largest number, swap with parent
+[10, 5, 9, 6, 7, 2, 8, 3, 4, 1]
+call heapify on index 1
+left child is index 3 value 6, right child is index 4 value 7
+7 is larger, swap with parent
+[10, 7, 9, 6, 5, 2, 8, 3, 4, 1]
+call heapify on index 4
+left child is index 9 value 1, right child is index 10, out of bounds
+parent is larger, does nothing
+```
+
+### Heap Sort Practice
+
+```javascript
+const heapSort = (array) => {
+  array = createMaxHeap(array);
+
+  for (let i = array.length - 1; i > 0; i--) {
+    swapPlace(0, i, array);
+    heapify(array, 0, i);
+  }
+
+  return array;
+};
+
+const createMaxHeap = (array) => {
+  for (let i = Math.floor(array.length / 2) - 1; i >= 0; i--) {
+    heapify(array, i, array.length);
+  }
+};
+
+const swapPlace = (index1, index2, array) => {
+  let temp = array[index1];
+  array[index1] = array[index2];
+  array[index2] = temp;
+  return array;
+};
+
+const heapify = (array, index, heapSize) => {
+  const left = 2 * index + 1;
+  const right = 2 * index + 2;
+
+  let largestValueIndex = index;
+
+  if (heapSize > left && array[largestValueIndex] < array[left]) {
+    largestValueIndex = left;
+  }
+
+  if (heapSize > right && array[largestValueIndex] < array[right]) {
+    largestValueIndex = right;
+  }
+
+  if (largestValueIndex !== index) {
+    swapPlace(index, largestValueIndex, array);
+    heapify(array, largestValueIndex, heapSize);
+  }
+};
+```
+
+### Applying Tree Algorithms
