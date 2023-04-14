@@ -14,7 +14,7 @@ Learn computer science with Brian Holt!
 
 **Start Date :** 14.03.2023
 
-**End Date :**
+**End Date :** 14.04.2023
 
 ### Course Content
 
@@ -34,11 +34,11 @@ Learn computer science with Brian Holt!
 
 - ✔ Trees
 
-- ❌ Applying Tree Algorithms
+- ✔ Applying Tree Algorithms
 
-- ❌ Other Data Structures
+- ✔ Other Data Structures
 
-- ❌ Wrapping Up
+- ✔ Wrapping Up
 
 ## ✔ Introduction
 
@@ -1340,3 +1340,221 @@ const heapify = (array, index, heapSize) => {
 ```
 
 ### Applying Tree Algorithms
+
+#### Graphs
+
+Bir Graph temel olarak kökü olmayan bir ağaçtır. Bir node olacak ve bu node diğer birçok node'a bağlanacak
+
+Graph, Tree'lerde yer aldığı gibi bir hiyerarşiye sahip değiller.
+
+Graph'lar node şeklinde birbirlerine bağlıdır fakat bir ebeveyn'leri (kökü) yoktur.
+
+Aşağıdaki insanların Job Title'ını bulmak istediğimde
+
+```
+  Bob — Sally
+  /    \
+me    Alice
+  \    /
+   Maria
+
+-> Add me to queue
+-> Dequeue me
+-> Add my job to the tally (program manager)
+-> Queue my connections, Bob and Maria
+-> Dequeue Bob
+-> Add Bob's job to the tally (designer)
+-> Queue Bob's connection, Sally and Alice
+-> Dequeue Maria
+-> Add Maria's job to the tally (program manager)
+-> Queue Maria's connections. Alice has already been queued so don't add any.
+
+-> Finish first iteration, one degree of separation
+```
+
+#### Graphs Practice
+
+```javascript
+const { getUser } = require("./jobs");
+
+const findMostCommonTitle = (myId, degreesOfSeparation) => {
+  let queue = [myId];
+  const seen = new Set(queue);
+  const jobs = {};
+
+  for (let i = 0; i <= degreesOfSeparation; i++) {
+    const newQueue = [];
+    while (queue.length) {
+      const user = getUser(queue.shift());
+
+      // queue up the next iteration
+      for (let j = 0; j < users.connections.length; j++) {
+        const connection = users.connections[j];
+        if (!seen.has(connection)) {
+          newQueue.push(connection);
+          seen.add(connection);
+        }
+      }
+      jobs[user.title] = jobs[user.title] ? jobs[user.title] + 1 : 1;
+    }
+
+    queue = newQueue;
+  }
+  const jobKeys = Object.keys(jobs);
+
+  let biggestNumber = jobs[jobKeys[0]];
+  let jobName = jobKeys[0];
+
+  for (let i = 1; i < jobKeys.length; i++) {
+    const currentJob = jobKeys[i];
+    if (jobs[currentJob] > biggestNumber) {
+      jobName = currentJob;
+      biggestNumber = job[currentJob];
+    }
+  }
+
+  return jobName;
+};
+```
+
+### PathFinding
+
+#### PathFinding Practice
+
+```javascript
+const NO_ONE = 0;
+const BY_A = 1;
+const BY_B = 2;
+
+function generateVisited(maze) {
+  const visited = [];
+  for (let y = 0; y < maze.length; y++) {
+    const yAxis = [];
+    for (let x = 0; x < maze[y].length; x++) {
+      const coordinate = {
+        closed: maze[y][x] === 1,
+        length: 0,
+        openedBy: NO_ONE,
+        x,
+        y,
+      };
+      yAxis.push(coordinate);
+    }
+    visited.push(yAxis);
+  }
+  return visited;
+}
+
+function findShortestPathLength(maze, [xA, yA], [xB, yB]) {
+  const visited = generateVisited(maze);
+  visited[yA][xA].openedBy = BY_A;
+  visited[yB][xB].openedBy = BY_B;
+
+  let aQueue = [visited[yA][xA]];
+  let bQueue = [visited[yB][xB]];
+  let iteration = 0;
+
+  while (aQueue.length && bQueue.length) {
+    iteration++;
+    // gather a neighbors
+    let aNeighbors = [];
+    while (aQueue.length) {
+      const coordinate = aQueue.shift();
+      aNeighbors = aNeighbors.concat(
+        getNeighbors(visited, coordinate.x, coordinate.y)
+      );
+    }
+
+    // process a neighbors
+
+    for (let i = 0; i < aNeighbors.length; i++) {
+      const neighbor = aNeighbors[i];
+
+      if (neighbor.openedBy === BY_B) {
+        return neighbor.length + iteration;
+      } else if (neighbor.openedBy === NO_ONE) {
+        neighbor.length = iteration;
+        neighbor.openedBy = BY_A;
+        aQueue.push(neighbor);
+      }
+    }
+
+    let bNeighbors = [];
+    while (bQueue.length) {
+      const coordinate = bQueue.shift();
+      bNeighbors = bNeighbors.concat(
+        getNeighbors(visited, coordinate.x, coordinate.y)
+      );
+    }
+
+    // process a neighbors
+
+    for (let i = 0; i < bNeighbors.length; i++) {
+      const neighbor = bNeighbors[i];
+
+      if (neighbor.openedBy === BY_A) {
+        return neighbor.length + iteration;
+      } else if (neighbor.openedBy === NO_ONE) {
+        neighbor.length = iteration;
+        neighbor.openedBy = BY_B;
+        bQueue.push(neighbor);
+      }
+    }
+
+    /*  for(let i = 0; i < aQueue.length; i++){
+      const coordinate = aQueue[i];
+    } */
+  }
+  return -1;
+}
+
+function getNeighbors(visited, x, y) {
+  const neighbors = [];
+
+  if (y - 1 >= 0 && !visited[y - 1][x].closed) {
+    // left
+    neighbors.push(visited[y - 1][x]);
+  }
+
+  if (y + 1 < visited[0].length && !visited[y + 1][x].closed) {
+    // right
+    neighbors.push(visited[y + 1][x]);
+  }
+
+  if (x - 1 >= 0 && !visited[y][x - 1].closed) {
+    // up
+    neighbors.push(visited[y][x - 1]);
+  }
+
+  if (x + 1 < visited.length && !visited[y][x + 1].closed) {
+    // down
+    neighbors.push(visited[y][x + 1]);
+  }
+
+  return neighbors;
+}
+```
+
+### Tries
+
+#### Tries Exercise
+
+#### Tries Solution
+
+### Bloom Filters
+
+### Bloom Filters Practice
+
+### Wrapping Up
+
+Bir bilgisayar bilimi sorusu çözerken izlenmesi gereken adımlar
+
+- ilk olarak ingilizce olarak düşünmeye çalışırım, high level adımlarla "şunu yapacağım, bunu yapacağım, sonra bunu yapacağım ve bunu döndüreceğim"
+
+- mülakat esnasında bu durum sözlü olarak ifade edilir ve mülakatı yapan kişiye sorunu anladığın mesajı verilebilir.
+
+- Bu noktadan sonra kurulacak olan fonksiyonlar konumu ve sayısı düşünülebilir.
+
+- Sorulan soruyu pseudocode şeklinde ifade etmelisin.
+
+"❗ Benim kişisel stilim, fonksiyon imzalarını, dönüş tiplerini ve yüksek seviye yorumları yazmak ve daha sonra geri dönüp doldurmaktır. Bu, niyetlerimi açıklamamı ve düşüncelerimi düzenlememde bana yardımcı olur. "
