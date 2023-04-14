@@ -21,3 +21,125 @@ Kitap önerileri
 - <a  href="https://www.amazon.com/Common-Sense-Guide-Structures-Algorithms-Second/dp/1680507222?keywords=introduction+to+algorithms&qid=1660584469&s=books&sprefix=introduction,stripbooks,93&sr=1-16&linkCode=sl1&tag=theprimeagen-20&linkId=2000de29907b98b5ac7a98aa6b52c1d9&language=en_US&ref_=as_li_ss_tl">A Common-Sense Guide to Data Structures and Algorithms, Second Edition: Level Up Your Core Programming Skills 2nd Edition</a>
 
 ## Basics
+
+### Big O Time Complexity
+
+- Big O, girişe bağlı olarak algoritmanızı zaman veya bellek açısından sınıflandırır. K
+
+- Kesin bir ölçüm olması amaçlanmamıştır. Bir algoritmanın 450 CPU birimini alacağı söylenemez.
+
+- Bunun yerine giriş (input) büyüdükçe veya kullanılan şeyler büyüdükçe algoritmanın nasıl tepki vereceğini anlaman için genelleştirilmiş bir yoldur.
+
+- Bu durumda **Big O N** karşına çıktığında algoritmanın girdisine bağlı olarak doğrusal olarak büyüdüğünü bilmelisin ve bunu ifade etmelisin.
+
+Neden kullanılır ?
+
+- Çoğu zaman bize belirli bir veri yapısı kullanıp kullanmamamız konusunda karar vermemize yardımcı olur. Veri yapıları giderek daha performanslı hale getirilirken bu kısıtlamaları yapmaya devam edilir.
+
+- Yanlış kullanılırsa, performan büyük ölçüde azalır,
+
+- Başka bir deyişle Big O, girişi büyüdükçe hesaplamanızın veya bellek kullanımının ne kadar büyüdüğünü belirler.
+- **❗ Büyüme(Growth) girdiye göre belirlenir**
+
+Örneğin O(N)
+
+```javascript
+// Programımız girdiye göre nasıl büyür ?
+// aşağıdaki fonksiyonu Big O açısından yorumlayamıyorsan...
+// Döngüye bak !
+
+function sum_char_codes(n: string): number {
+  let sum = 0;
+  for (let i = 0; i < n.length; ++i) {
+    sum += n.charCodeAt(i);
+  }
+  return sum;
+}
+```
+
+Örnek - 2 O(2N)
+
+```javascript
+function sum_char_codes(n: string): number {
+  let sum = 0;
+
+  for (let i = 0; i < n.length; ++i) {
+    sum += n.charCodeAt(i);
+  }
+
+  for (let i = 0; i < n.length; ++i) {
+    sum += n.charCodeAt(i);
+  }
+  return sum;
+}
+```
+
+Örnek - 3 O(N)
+
+```javascript
+function sum_char_codes(n: string): number {
+  let sum = 0;
+
+  for (let i = 0; i < n.length; ++i) {
+    const charCode = n.charCodeAt(i);
+    // Capital E
+    if (charCode === 69) {
+      return sum;
+    }
+    sum += charCode;
+  }
+  return sum;
+}
+```
+
+**‼ Important concepts ‼**
+
+- growth is with respect to the input
+
+- Constants are dropped
+
+- Worst case is usually the way we measure
+
+![https://theprimeagen.github.io/fem-algos/images/big-o-face.png](https://theprimeagen.github.io/fem-algos/images/big-o-face.png)
+
+#### O(N^2)
+
+```javascript
+function sum_char_codes(n: string): number {
+  let sum = 0;
+
+  for (let i = 0; i < n.length; ++i) {
+    for (let j = 0; j < n.length; ++j) {
+      sum += charCode;
+    }
+  }
+  return sum;
+}
+```
+
+#### O(N^3)
+
+```javascript
+function sum_char_codes(n: string): number {
+  let sum = 0;
+
+  for (let i = 0; i < n.length; ++i) {
+    for (let j = 0; j < n.length; ++j) {
+      for (let k = 0; k < n.length; ++k) {
+        sum += charCode;
+      }
+    }
+  }
+  return sum;
+}
+```
+
+#### O(n log n)
+
+- Quicksort
+
+#### O(log n)
+
+- Binary search trees
+
+#### O(sqrt(n))
