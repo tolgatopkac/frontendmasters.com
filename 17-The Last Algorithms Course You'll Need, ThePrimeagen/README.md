@@ -143,3 +143,31 @@ function sum_char_codes(n: string): number {
 - Binary search trees
 
 #### O(sqrt(n))
+
+### Arrays Data Structure
+
+**Array** : Bir array 'in en temel fikri, sadece ardışık bir bellek alanı olduğudur. Ardışık, belirli bir bayt içeren bölünmeyen bellek anlamına gelir.
+
+```
+// [  ] => memory space
+```
+
+```c
+a = int[3]
+a[0]
+```
+
+```javascript
+const a = new ArrayBuffer(6);
+
+a;
+// ArrayBuffer {[Uint8Contents]: <00 00 00 00 00 00 00>, byteLength: 6 }
+
+const a8 = new Uint8Array(a);
+a8[0] = 45;
+
+a;
+// ArrayBuffer { [Uint8Contents]: <2d 00 00 00 00 00>, byteLength: 6}
+```
+
+## Search
