@@ -171,3 +171,57 @@ a;
 ```
 
 ## Search
+
+**Linear Search Kata**
+
+```typescript
+function linear_search(haystack: number[], needle: number): boolean {
+  for (let i = 0; i < haystack.length; i++) {
+    if (haystack[i] == needle) {
+      return true;
+    }
+  }
+  return false;
+}
+```
+
+**Binary Search Algorithm**
+
+Veri kümesinin (array or object) sıralı olup olmadığını sormak her zaman önemlidir. Eğer veri kümesi sıralıysa, o veri ile yapabileceğin bazı avantajların var.
+
+**Pseudo Code Binary Search**
+
+do {
+
+- search(arr,low,high)
+- [low - middle - high]
+- m = [low +(high - low ) / 2]
+- v = arr[m]
+- if v = n return true;
+- else if v > m {low = m + 1}
+- else high = mid
+  }while (low < high)
+  return false
+
+```typescript
+function bs_list(haystack: number[], needle: number): boolean {
+  let low = 0;
+  let high = haystack.length;
+  do {
+    const mid = Math.floor((low + high) / 2);
+    const v = haystack[mid];
+    if (v === needle) {
+      return true;
+    } else if (v > needle) {
+      high = mid;
+    } else {
+      low = mid + 1;
+    }
+  } while (low < high);
+  {
+    return false;
+  }
+}
+```
+
+**Two Crystal Balls Problem**
