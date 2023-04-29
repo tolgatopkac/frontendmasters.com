@@ -225,3 +225,59 @@ function bs_list(haystack: number[], needle: number): boolean {
 ```
 
 **Two Crystal Balls Problem**
+Given two crystal balls that will break if dropped from high enough distance, determine the exact spot in which it will break in the most optimized way.
+
+```typescript
+export default function two_crystal_balls(breaks: boolean[]): number {
+  const jmpAmount = Math.floor(Math.sqrt(breaks.length));
+
+  let i = jmpAmount;
+  for (; i < breaks.length; i += jmpAmount) {
+    if (breaks[i]) {
+      break;
+    }
+  }
+  i -= jmpAmount;
+
+  for (let j = 0; j < jmpAmount && i < breaks.length; ++j, ++i) {
+    if (breaks[i]) {
+      return i;
+    }
+  }
+  return -1;
+}
+```
+
+## Sort
+
+### BubbleSort
+
+Implementing Buuble Sort
+
+[0,.......,N]
+
+```
+for i...n
+
+  for j...n-1-1
+
+    if(arr[i] > arr[j])
+
+      swap(i,j)
+```
+
+```typescript
+export default function bubble_sort(arr: number[]): void {
+  for (let i = 0; i < arr.length; ++i) {
+    for (let j = 0; i < arr.length - 1 - i; ++j) {
+      if (arr[j] > arr[j + 1]) {
+        const tmp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = tmp;
+      }
+    }
+  }
+}
+```
+
+### Linked List Data
