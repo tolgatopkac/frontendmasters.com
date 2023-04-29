@@ -281,3 +281,31 @@ export default function bubble_sort(arr: number[]): void {
 ```
 
 ### Linked List Data
+
+```typescript
+type Node<T> = {
+  value: T;
+  next?: Node<T>;
+  prev?: T;
+};
+```
+
+### Linked List Complexity
+
+LinkedLists o kadar temeldir ki, her biri bir graph. Her biri teknik olarak bir tree'dir. LinkedLists en temel birimdir.
+
+```typescript
+interface LinkedList<T> {
+  get length(): number;
+  insertAt(item: T, index: number): void;
+  remove(item: T): T | undefined;
+  removeAt(index: number): T | undefined;
+  append(item: T): void;
+  prepend(item: T): void;
+  get(index: number): T | undefined;
+}
+```
+
+### Queue
+
+Queue is simply a FIFO(first in first out) structure
