@@ -309,3 +309,47 @@ interface LinkedList<T> {
 ### Queue
 
 Queue is simply a FIFO(first in first out) structure
+
+## Arrays
+
+### Arrays vs Linked List
+
+- Usability
+- Time
+- Space
+
+Arraylist bad with enqueue and dequeue but good with push and pop.
+
+Which one is better ?
+which one would you rather use, an Array List or link list ?
+"Whenever someone asks that in an interview, say it depends"
+
+### ArrayBuffer
+
+## Recursion
+
+So the simplest way is a function that calls itself, and this keeps happening until it reaches something known as a base case.
+
+The simplest example :
+
+```typescript
+function foo(n: number): number {
+  // base case
+  if (n === 1) {
+    return 1;
+  }
+
+  //  we shall recurse!
+  return n + foo(n - 1);
+}
+```
+
+foo(n)
+if n = 1
+return 1;
+else return n + foo(n-1)
+
+- Recursion fonksiyonlar hakkında anlaşılması gereken önemli bir şey var ve gerçekten fonksiyon çağırmakla ilgili üç değer var ki bu görşelleştirmeye yardımcı olabilir.
+- returnAddress
+- returnValue
+- Arguments
