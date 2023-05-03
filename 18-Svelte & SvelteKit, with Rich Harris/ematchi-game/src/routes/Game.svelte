@@ -7,6 +7,7 @@
 	<div class="grid-container">
 		<Grid />
 	</div>
+
 	<div class="info" />
 </div>
 
