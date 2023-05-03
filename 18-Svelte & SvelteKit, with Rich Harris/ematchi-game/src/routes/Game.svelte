@@ -16,18 +16,19 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		/* height: 100%; */
+		height: 100%;
+		font-size: min(1vmin, 0.3rem);
 	}
 
 	.info {
-		width: 80vmin;
-		height: 10vmin;
+		width: 80em;
+		height: 10em;
 		background: purple;
 	}
 
 	.grid-container {
-		width: 80vmin;
-		height: 80vmin;
+		width: 80em;
+		height: 80em;
 		background: teal;
 	}
 </style>
