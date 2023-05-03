@@ -1,6 +1,12 @@
+<script>
+	import Grid from './Grid.svelte';
+</script>
+
 <div class="game">
 	<div class="info" />
-	<div class="grid-container" />
+	<div class="grid-container">
+		<Grid />
+	</div>
 	<div class="info" />
 </div>
 
