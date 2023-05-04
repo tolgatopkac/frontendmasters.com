@@ -30,7 +30,13 @@
 <div class="game">
 	<div class="info" />
 	<div class="grid-container">
-		<Grid {grid} />
+		<Grid
+			{grid}
+			on:found={(e) => {
+				found = [...found, e.detail.emoji];
+			}}
+			{found}
+		/>
 	</div>
 
 	<div class="info" />
