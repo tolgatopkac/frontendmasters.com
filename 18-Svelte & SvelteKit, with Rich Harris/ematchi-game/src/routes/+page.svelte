@@ -13,6 +13,15 @@
 	on:play={() => {
 		state = 'playing';
 	}}
+	on:pause={() => {
+		state = 'paused';
+	}}
+	on:win={() => {
+		state = 'won';
+	}}
+	on:lose={() => {
+		state = 'lost';
+	}}
 />
 
 {#if state !== 'playing'}
