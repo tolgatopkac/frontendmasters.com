@@ -1,10 +1,32 @@
-<script>
+<script lang="ts">
 	import Square from './Square.svelte';
+	export let grid: string[];
+
+	let a = -1;
+	let b = -1;
 </script>
 
 <div class="grid">
-	{#each Array(16) as _, i}
-		<Square />
+	{#each grid as emoji, i}
+		<Square
+			{emoji}
+			on:click={() => {
+				if (a === -1 && b === -1) {
+					a = i;
+				} else if (b === -1) {
+					b = i;
+					if (grid[a] === grid[b]) {
+						// correct
+					} else {
+						// incorrect
+					}
+				} else {
+					b = -1;
+					a = i;
+				}
+			}}
+			selected={a === i || b === i}
+		/>
 	{/each}
 </div>
 
